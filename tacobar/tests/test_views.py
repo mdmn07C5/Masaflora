@@ -1,6 +1,6 @@
 from unittest import skip
 
-from django.test import TestCase, Client
+from django.test import TestCase, Client, RequestFactory
 from django.urls import reverse
 from django.http import HttpRequest
 from tacobar.models import Category, MenuItem
@@ -13,6 +13,7 @@ from tacobar.views import menu
 
 class TestViewResponses(TestCase):
     def setUp(self):
+        self.factory = RequestFactory()
         self.c = Client()
         Category.objects.create(name='test-category', slug='test-category')
         self.data1 = MenuItem.objects.create(category_id=1, name='test1', slug='test-dish', price=420.69, image="Nonelmao")
@@ -35,9 +36,9 @@ class TestViewResponses(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_homepage_html(self):
-        """Test homepage html, sending request directly to view
+        """Test homepage html, without going through browser
         """
-        request = HttpRequest()
+        request = self.factory.get('/')
         response = menu(request)
         html = response.content.decode('utf8')
         self.assertIn('<title> asdfasdf </title>', html)
