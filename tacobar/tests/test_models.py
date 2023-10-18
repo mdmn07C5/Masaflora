@@ -11,8 +11,7 @@ class TestCategoriesModel(TestCase):
     def test_category_model_entry(self):
         """Test Category model data insertion/types/field/attributes
         """
-        data = self.data1
-        self.assertTrue(isinstance(data, Category))
+        self.assertIsInstance(self.data1, Category)
 
     def test_category_model_entry(self):
         """Test Category model return name"""
