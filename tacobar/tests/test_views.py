@@ -13,7 +13,7 @@ from tacobar import views
 class TestViewResponses(TestCase):
     def setUp(self):
         self.c = Client()
-        Category.objects.create(name='test', slug='test')
+        Category.objects.create(name='test-category', slug='test-category')
         self.data1 = MenuItem.objects.create(category_id=1, name='test1', slug='test-dish', price=420.69, image="Nonelmao")
     
     def test_url_allowed_hosts(self):
@@ -23,7 +23,14 @@ class TestViewResponses(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_menuitem_detail_url(self):
+        """Test menuitem reverse and status code
+        """
         response = self.c.get(reverse(viewname='tacobar:menuitem_detail',args=['test-dish']))
+        self.assertEqual(response.status_code, 200)
+
+    def test_category_list_url(self):
+        """Test category list reverse and status code"""
+        response = self.c.get(reverse(viewname='tacobar:category_list',args=['test-category']))
         self.assertEqual(response.status_code, 200)
 
     def test_homepage_url(self):
