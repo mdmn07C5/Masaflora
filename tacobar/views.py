@@ -12,7 +12,7 @@ def category_list(request, category_slug):
     )
 
 def menu(request):
-    menuitems = MenuItem.objects.all()
+    menuitems = MenuItem.objects.filter(is_available=True)
     return render(
         request=request,
         template_name='tacobar/home.html',
