@@ -31,3 +31,6 @@ $RECYCLE.BIN/
 
 # fucking bullshit images for testing
 *.png
+
+# fucking bullshit vscode shenanigans
+.vscode/

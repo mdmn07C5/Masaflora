@@ -8,22 +8,23 @@ def category_list(request, category_slug):
     return render(
         request=request,
         template_name='tacobar/menu/category.html',
-        context={'category':category, 'menuitems': menuitems}
+        context={'category': category, 'menuitems': menuitems}
     )
+
 
 def menu_all(request):
     menuitems = MenuItem.menuitems.all()
     return render(
         request=request,
         template_name='tacobar/home.html',
-        context={'menuitems':menuitems}
+        context={'menuitems': menuitems}
     )
+
 
 def menuitem_detail(request, slug):
     menuitem = get_object_or_404(MenuItem, slug=slug, is_available=True)
     return render(
         request=request,
         template_name='tacobar/menu/detail.html',
-        context={'menuitem':menuitem}
+        context={'menuitem': menuitem}
     )
-
