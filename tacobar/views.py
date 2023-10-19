@@ -4,14 +4,14 @@ from .models import Category, MenuItem
 
 def category_list(request, category_slug):
     category = get_object_or_404(Category, slug=category_slug)
-    menuitems = MenuItem.menuitems.all()
+    menuitems = MenuItem.objects.filter(category=category)
     return render(
         request=request,
         template_name='tacobar/menu/category.html',
         context={'category':category, 'menuitems': menuitems}
     )
 
-def menu(request):
+def menu_all(request):
     menuitems = MenuItem.menuitems.all()
     return render(
         request=request,
