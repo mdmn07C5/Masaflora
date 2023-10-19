@@ -17,9 +17,6 @@ db.sqlite3-journal
 .coverage
 /htmlcov
 
-# Static folder at project root
-/static/
-
 # Static shit for app
 /blog/templates/blog/icons/
 
