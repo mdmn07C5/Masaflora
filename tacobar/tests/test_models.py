@@ -13,10 +13,11 @@ class TestCategoriesModel(TestCase):
         """
         self.assertIsInstance(self.data1, Category)
 
-    def test_category_model_entry(self):
+    def test_category_model_name(self):
         """Test Category model return name"""
         data = self.data1
         self.assertEqual(str(data), "Category Test")
+
 
 class TestMenuItemModel(TestCase):
 

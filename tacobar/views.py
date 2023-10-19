@@ -1,11 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Category, MenuItem
 
-def categories(request):
-    return {
-        'categories':Category.objects.all()
-    }
-    
+
 def category_list(request, category_slug):
     category = get_object_or_404(Category, slug=category_slug)
     menuitems = MenuItem.objects.filter(category=category)
@@ -30,3 +26,8 @@ def menuitem_detail(request, slug):
         template_name='tacobar/menu/detail.html',
         context={'menuitem':menuitem}
     )
+
+def categories(request):
+    return {
+        'categories':Category.objects.all()
+    }
