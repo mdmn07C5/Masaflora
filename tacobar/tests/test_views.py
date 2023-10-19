@@ -4,7 +4,7 @@ from django.test import TestCase, Client, RequestFactory
 from django.urls import reverse
 from django.http import HttpRequest
 from tacobar.models import Category, MenuItem
-from tacobar.views import menu
+from tacobar.views import menu_all
 
 # @skip("dummy test to identify which tests are done first")
 # class TestSkip(TestCase):
@@ -21,7 +21,9 @@ class TestViewResponses(TestCase):
     def test_url_allowed_hosts(self):
         """Test allowed hosts
         """
-        response = self.c.get('/')
+        response = self.c.get('/', HTTP_HOST='noaddress.com')
+        self.assertEqual(response.status_code, 400)
+        response = self.c.get('/', HTTP_HOST='localhost')
         self.assertEqual(response.status_code, 200)
 
     def test_menuitem_detail_url(self):
@@ -39,7 +41,7 @@ class TestViewResponses(TestCase):
         """Test homepage html, without going through browser
         """
         request = self.factory.get('/')
-        response = menu(request)
+        response = menu_all(request)
         html = response.content.decode('utf8')
         self.assertIn('<title> asdfasdf </title>', html)
         self.assertEqual(response.status_code, 200)
