@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.query import QuerySet
 from django.urls import reverse
 
 # Create your models here.
@@ -19,6 +20,9 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+class MenuItemManager(models.Manager):
+    def get_queryset(self) -> QuerySet:
+        return super(MenuItemManager, self).get_queryset().filter(is_available=True)
 
 class MenuItem(models.Model):
     name = models.CharField(max_length=255, db_index=True)
@@ -31,6 +35,8 @@ class MenuItem(models.Model):
     is_available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now_add=True)
+    objects = models.Manager()
+    menuitems = MenuItemManager()
 
     class Meta:
         verbose_name_plural = 'menuitems'

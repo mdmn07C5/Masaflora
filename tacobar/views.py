@@ -4,7 +4,7 @@ from .models import Category, MenuItem
 
 def category_list(request, category_slug):
     category = get_object_or_404(Category, slug=category_slug)
-    menuitems = MenuItem.objects.filter(category=category)
+    menuitems = MenuItem.menuitems.all()
     return render(
         request=request,
         template_name='tacobar/menu/category.html',
@@ -12,7 +12,7 @@ def category_list(request, category_slug):
     )
 
 def menu(request):
-    menuitems = MenuItem.objects.filter(is_available=True)
+    menuitems = MenuItem.menuitems.all()
     return render(
         request=request,
         template_name='tacobar/home.html',
