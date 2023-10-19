@@ -27,7 +27,3 @@ def menuitem_detail(request, slug):
         context={'menuitem':menuitem}
     )
 
-def categories(request):
-    return {
-        'categories':Category.objects.all()
-    }
