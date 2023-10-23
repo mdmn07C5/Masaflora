@@ -2,7 +2,8 @@ from tacobar.models import MenuItem
 from decimal import Decimal
 
 class Cart():
-
+    """Session wrapper for Cart model
+    """
     def __init__(self, request):
         self.session = request.session
         # self.cart = self.session.get('session_cart', {'Peepee':'PooPoo'})
@@ -10,6 +11,9 @@ class Cart():
         if 'session_cart' not in request.session:
             cart = self.session['session_cart'] = {}
         self.cart = cart
+    
+    def save(self):
+        self.session.modified = True
 
     def add(self, menuitem, menuitemqty):
         """Add/update user's cart session data
@@ -24,7 +28,22 @@ class Cart():
         qty = self.cart[menuitem_id].get('qty', 0)
         self.cart[menuitem_id]['qty'] = int(menuitemqty) + int(qty)
 
-        self.session.modified = True
+        self.save()
+
+    def delete(self, menuitem_id):
+        """Delete menuitem from cart
+
+        Args:
+            menuitem_id (int): primary key of the menuitem to delete
+        """
+        menuitem_id = str(menuitem_id)
+        if menuitem_id in self.cart:
+            del self.cart[menuitem_id]
+
+            self.save()
+
+    def get_sub_total(self):
+        return sum(Decimal(item['price'] * item['qty']) for item in self.cart.values())
 
     def __len__(self): 
         return sum(item['qty'] for item in self.cart.values())
@@ -44,3 +63,4 @@ class Cart():
             item['total_price'] = item['price'] * item['qty']
             yield item
         
+    

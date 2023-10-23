@@ -48,7 +48,7 @@
     <script>
         $(document).on("click", "#add-to-cart-button", function (e) {
             e.preventDefault();
-            console.log($("#select option:selected").val())
+            console.log($("#add-to-cart-button").val())
             $.ajax({
                 type: "POST",
                 url: "{% url "cart:cart_add" %}",

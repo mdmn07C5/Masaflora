@@ -3,64 +3,98 @@
 {% block  title %}
     Shopping Cart Summary
 {% endblock title %}
-
 {% block content %}
-<main class="pt-5">
-    <div class="container">
-        <h1 class="h5">Shopping Cart</h1>
-        {% for item in cart %}
+    <main class="pt-5">
+        <div class="container">
+            <h1 class="h5">Shopping Cart</h1>
+            {% for item in cart %}
             {% with menuitem=item.menuitem %}
-            <div class="row gy-2">
-            <div class="row g-3">
-                <div class="col-md-5 col-lg-5 order-md-first bg-light">
-                    <img class="img-fluid mx-auto d-block"
-                         width="200px"
-                         alt="Responsive image"
-                         src="{{ menuitem.image.url }}">
+            <div data-index="{{ menuitem.id }}", class="row mb-4 border">
+                <div class="col-md-3 col-lg-2 order-md-first bg-light">
+                    <img class="img-fluid mx-auto d-block" width="120px" alt="Responsive image" src="{{ menuitem.image.url }}">
                 </div>
-                <div class="col-md-7 col-lg-7 ps-md-3 ps-lg-5">
-                    <h1 class="mb-0 h4">{{ menuitem.name|title }}</h1>
-                    <p>
-                        <span class="lead">{{ menuitem.short_description }}</span>
-                    </p>
-                    <p>{{ menuitem.full_description|slice:":355" }}...</p>
-                    <div class="border">
-                        <div class="col border-bottom">
-                            <div class="row p-3">
-                                <div class="col-6">Amount: {{ item.qty }}</div>
-                                <div class="col-6 text-end">
-                                    <span class="h4 fw-bold">${{ item.total_price }}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="row p-3">
-                                <div class="col-6">
-                                    <label for="select">Qty</label>
-                                    <select id="select">
-                                        {% for i in '12345' %}<option value="{{ i }}">{{ i }}</option>{% endfor %}
-                                    </select>
-                                </div>
-                                <div class="col-6 text-end">
-                                    <div class="btn-group">
-                                    <button type="button"
-                                            id="add-to-cart-button"
-                                            value="{{ menuitem.id }}"
-                                            class="btn btn-outline-secondary btn-sm">Update</button>
-                                    <button type="button"
-                                            id="add-to-cart-button"
-                                            value="{{ menuitem.id }}"
-                                            class="btn btn-outline-secondary btn-sm">Delete</button>
-                                    </div>
-                                    </div>
-                            </div>
+
+                <div class="col-md-9 col-lg-10 ps-md-3 ps-lg-10">
+                    <a href="{{ menuitem.get_absolute_url }}" class="test-decoration-none text-reset">
+                        <h1 class="h5 pt-2">{{ menuitem.name }}</h1>
+                    </a>
+                </div>
+
+                <div class="border">
+                    <div class="col border-bottom">
+                        <div class="row p-3">
+                            <div class="col-6">Amount:{{ item.qty }}</div>
+                            <dir class="col-6 text-end"><span class="h6 fw-bold">${{ item.total_price }}</span></dir>
                         </div>
                     </div>
                 </div>
+
+                <div class="col">
+                    <div class="row p-3">
+                        <div class="col-12">
+                            <label for="select">Qty</label>
+                            <select id="select"{{ item.qty }}>
+                                <option selected>{{ item.qty }}</option>
+                                {% for i in '12345' %}<option value="{{ i }}">{{ i }}</option>{% endfor %}
+                            </select>
+                            <button type="button", id="update-button" data-index="{{ menuitem.id }}" class="btn btn-outline-secondary btn-sm update-button">Update</button>
+                            <button type="button", id="delete-button" data-index="{{ menuitem.id }}" class="btn btn-outline-secondary btn-sm delete-button">Delete</button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            </div>
+
             {% endwith %}
-        {% endfor %}
-    </div>
-</main>
+            {% endfor %}
+            <div class="col-12 text-end">
+                <div class="h3 fw-bold">
+                    Sub Total: $<span id="subtotal">{{ cart.get_sub_total }}</span>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        $(document).on("click", "#update-button", function (e) {
+            e.preventDefault();
+            var item_id = $(this).data('index');
+            $.ajax({
+                type: "POST",
+                url: "{% url "cart:cart_add" %}",
+                data: {
+                    menuitemid: $(this).data('index'),
+                    menuitemqty: $("#select option:selected").val(),
+                    csrfmiddlewaretoken: "{{ csrf_token }}",
+                    action: "post"
+                },
+                success: function (json) {
+                    document.getElementById("cart-item-qty").innerHTML = json.qty
+                },
+                error: function (xhr, errmsg, err) {
+
+                }
+            });
+
+        })
+
+        $(document).on("click", "#delete-button", function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                type: "POST",
+                url: "{% url "cart:cart_delete" %}",
+                data: {
+                    menuitemid: $(this).data('index'),
+                    csrfmiddlewaretoken: "{{ csrf_token }}",
+                    action: "post"
+                },
+                success: function (json) {
+
+                },
+                error: function (xhr, errmsg, err) {
+
+                }
+            });
+        })
+    </script>
 {% endblock content %}
