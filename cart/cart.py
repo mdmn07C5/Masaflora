@@ -1,4 +1,5 @@
-
+from tacobar.models import MenuItem
+from decimal import Decimal
 
 class Cart():
 
@@ -27,3 +28,19 @@ class Cart():
 
     def __len__(self): 
         return sum(item['qty'] for item in self.cart.values())
+    
+    def __iter__(self):
+        """Collect menuitem id from session data to query db and return menuitems
+        """
+        menuitem_ids = self.cart.keys()
+        menuitems = MenuItem.objects.filter(id__in=menuitem_ids)
+        
+        cart = self.cart.copy()
+        for menuitem in menuitems:
+            cart[str(menuitem.id)]['menuitem'] = menuitem
+
+        for item in cart.values():
+            item['price'] = Decimal(item['price'])
+            item['total_price'] = item['price'] * item['qty']
+            yield item
+        

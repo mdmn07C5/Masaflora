@@ -7,7 +7,8 @@ from tacobar.models import MenuItem
 
 
 def cart_summary(request):
-    return render(request=request, template_name='tacobar/cart/summary.html')
+    cart = Cart(request)
+    return render(request=request, template_name='tacobar/cart/summary.html', context={'cart':cart})
 
 
 def cart_add(request):
