@@ -24,3 +24,6 @@ class Cart():
         self.cart[menuitem_id]['qty'] = int(menuitemqty) + int(qty)
 
         self.session.modified = True
+
+    def __len__(self): 
+        return sum(item['qty'] for item in self.cart.values())

@@ -59,7 +59,7 @@
                     action: "post"
                 },
                 success: function (json) {
-
+                    document.getElementById("cart-item-qty").innerHTML = json.qty
                 },
                 error: function (xhr, errmsg, err) {
 
