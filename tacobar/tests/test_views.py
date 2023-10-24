@@ -1,4 +1,6 @@
 from unittest import skip
+from importlib import import_module
+from django.conf import settings
 
 from django.test import TestCase, Client, RequestFactory
 from django.urls import reverse
@@ -44,14 +46,12 @@ class TestViewResponses(TestCase):
     def test_homepage_html(self):
         """Test homepage html, without going through browser
         """
-        request = self.factory.get('/')
+        request = HttpRequest()
+        session_engine = import_module(settings.SESSION_ENGINE)
+        request.session = session_engine.SessionStore()
         response = menu_all(request)
         html = response.content.decode('utf8')
-        self.assertIn('<title> asdfasdf </title>', html)
+        self.assertIn('RestaurantHomepage', html)
+        self.assertTrue(html.startswith('\n<!DOCTYPE html>\n'))
         self.assertEqual(response.status_code, 200)
 
-# TODO
-    def test_homepage_url(self):
-        """Test homepage response status
-        """
-        pass
