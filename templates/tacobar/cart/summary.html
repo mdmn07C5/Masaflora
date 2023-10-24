@@ -23,7 +23,11 @@
                 <div class="border">
                     <div class="col border-bottom">
                         <div class="row p-3">
-                            <div class="col-6">Amount:{{ item.qty }}</div>
+                            <div class="col-6">Amount:
+                                <div id="{{ menuitem.id }}-qty">
+                                    {{ item.qty }}
+                                </div>
+                            </div>
                             <dir class="col-6 text-end"><span class="h6 fw-bold">${{ item.total_price }}</span></dir>
                         </div>
                     </div>
@@ -34,8 +38,8 @@
                         <div class="col-12">
                             <label for="select">Qty</label>
                             <select id="select"{{ item.qty }}>
-                                <option selected>{{ item.qty }}</option>
-                                {% for i in '12345' %}<option value="{{ i }}">{{ i }}</option>{% endfor %}
+                                <option selected value=1>1</option>
+                                {% for i in '2345' %}<option value="{{ i }}">{{ i }}</option>{% endfor %}
                             </select>
                             <button type="button", id="update-button" data-index="{{ menuitem.id }}" class="btn btn-outline-secondary btn-sm update-button">Update</button>
                             <button type="button", id="delete-button" data-index="{{ menuitem.id }}" class="btn btn-outline-secondary btn-sm delete-button">Delete</button>
@@ -62,13 +66,14 @@
                 type: "POST",
                 url: "{% url "cart:cart_add" %}",
                 data: {
-                    menuitemid: $(this).data('index'),
+                    menuitemid: item_id,
                     menuitemqty: $("#select option:selected").val(),
                     csrfmiddlewaretoken: "{{ csrf_token }}",
                     action: "post"
                 },
                 success: function (json) {
                     document.getElementById("cart-item-qty").innerHTML = json.qty
+                    document.getElementById(item_id+"-qty").innerHTML = json.item_qty
                 },
                 error: function (xhr, errmsg, err) {
 
