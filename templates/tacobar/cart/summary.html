@@ -9,7 +9,7 @@
             <h1 class="h5">Shopping Cart</h1>
             {% for item in cart %}
             {% with menuitem=item.menuitem %}
-            <div data-index="{{ menuitem.id }}", class="row mb-4 border">
+            <div data-index="{{ menuitem.id }}", class="row mb-4 border menu-item">
                 <div class="col-md-3 col-lg-2 order-md-first bg-light">
                     <img class="img-fluid mx-auto d-block" width="120px" alt="Responsive image" src="{{ menuitem.image.url }}">
                 </div>
@@ -84,17 +84,18 @@
 
         $(document).on("click", "#delete-button", function (e) {
             e.preventDefault();
-
+            var item_id = $(this).data('index');
             $.ajax({
                 type: "POST",
                 url: "{% url "cart:cart_delete" %}",
                 data: {
-                    menuitemid: $(this).data('index'),
+                    menuitemid: item_id,
                     csrfmiddlewaretoken: "{{ csrf_token }}",
                     action: "post"
                 },
                 success: function (json) {
-
+                    document.getElementById("cart-item-qty").innerHTML = json.qty
+                    $('.menu-item[data-index="' + item_id + '"]').remove();
                 },
                 error: function (xhr, errmsg, err) {
 

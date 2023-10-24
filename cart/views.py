@@ -27,5 +27,5 @@ def cart_delete(request):
     if request.POST.get('action') == 'post':
         menuitem_id = int(request.POST.get('menuitemid'))
         cart.delete(menuitem_id=menuitem_id)
-        response = JsonResponse({'Success': True})
+        response = JsonResponse({'qty': len(cart)})
         return response
