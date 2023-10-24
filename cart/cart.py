@@ -1,9 +1,11 @@
 from tacobar.models import MenuItem
 from decimal import Decimal
 
+
 class Cart():
     """Session wrapper for Cart model
     """
+
     def __init__(self, request):
         self.session = request.session
         # self.cart = self.session.get('session_cart', {'Peepee':'PooPoo'})
@@ -11,7 +13,7 @@ class Cart():
         if 'session_cart' not in request.session:
             cart = self.session['session_cart'] = {}
         self.cart = cart
-    
+
     def save(self):
         self.session.modified = True
 
@@ -24,9 +26,12 @@ class Cart():
         menuitem_id = str(menuitem.id)
         self.cart[menuitem_id] = self.cart.get(
             menuitem_id, {'price': str(menuitem.price,)})
-        
+
         qty = self.cart[menuitem_id].get('qty', 0)
         self.cart[menuitem_id]['qty'] = int(menuitemqty) + int(qty)
+
+        self.cart[menuitem_id]['sub_total'] = str(
+            self.get_sub_total(menuitem_id))
 
         self.save()
 
@@ -42,18 +47,22 @@ class Cart():
 
             self.save()
 
-    def get_sub_total(self):
-        return sum(Decimal(item['price'] * item['qty']) for item in self.cart.values())
+    def get_sub_total(self, menuitem_id):
+        return self.cart[menuitem_id]['qty'] * Decimal(self.cart[menuitem_id]['price'])
 
-    def __len__(self): 
+    def get_total(self):
+        return sum(Decimal(item['price']) * item['qty'] for item in self.cart.values())
+
+    def __len__(self):
+        print(self.cart.values())
         return sum(item['qty'] for item in self.cart.values())
-    
+
     def __iter__(self):
         """Collect menuitem id from session data to query db and return menuitems
         """
         menuitem_ids = self.cart.keys()
         menuitems = MenuItem.objects.filter(id__in=menuitem_ids)
-        
+
         cart = self.cart.copy()
         for menuitem in menuitems:
             cart[str(menuitem.id)]['menuitem'] = menuitem
@@ -62,5 +71,3 @@ class Cart():
             item['price'] = Decimal(item['price'])
             item['total_price'] = item['price'] * item['qty']
             yield item
-        
-    

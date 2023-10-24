@@ -24,11 +24,13 @@
                     <div class="col border-bottom">
                         <div class="row p-3">
                             <div class="col-6">Amount:
-                                <div id="{{ menuitem.id }}-qty">
+                                <div id="{{ menuitem.id }}-qty" class="d-inline">
                                     {{ item.qty }}
                                 </div>
                             </div>
-                            <dir class="col-6 text-end"><span class="h6 fw-bold">${{ item.total_price }}</span></dir>
+                            <div class="col-6 text-end"><span class="h6 fw-bold">
+                                $<div id="{{ menuitem.id }}-sub-total" class="d-inline">{{ item.total_price }}</div>
+                            </span></div>
                         </div>
                     </div>
                 </div>
@@ -37,7 +39,7 @@
                     <div class="row p-3">
                         <div class="col-12">
                             <label for="select">Qty</label>
-                            <select id="select"{{ item.qty }}>
+                            <select id="select"{{ item.id }}>
                                 <option selected value=1>1</option>
                                 {% for i in '2345' %}<option value="{{ i }}">{{ i }}</option>{% endfor %}
                             </select>
@@ -53,7 +55,7 @@
             {% endfor %}
             <div class="col-12 text-end">
                 <div class="h3 fw-bold">
-                    Sub Total: $<span id="subtotal">{{ cart.get_sub_total }}</span>
+                    Total: $<div id="total" class="d-inline">{{ cart.get_total }}</div>
                 </div>
             </div>
         </div>
@@ -72,8 +74,10 @@
                     action: "post"
                 },
                 success: function (json) {
-                    document.getElementById("cart-item-qty").innerHTML = json.qty
-                    document.getElementById(item_id+"-qty").innerHTML = json.item_qty
+                    document.getElementById("cart-item-qty").innerHTML = json.qty;
+                    document.getElementById(item_id+"-qty").innerHTML = json.item_qty;
+                    document.getElementById(item_id+"-sub-total").innerHTML = json.sub_total;
+                    document.getElementById("total").innerHTML = json.total;
                 },
                 error: function (xhr, errmsg, err) {
 
@@ -94,8 +98,9 @@
                     action: "post"
                 },
                 success: function (json) {
-                    document.getElementById("cart-item-qty").innerHTML = json.qty
+                    document.getElementById("cart-item-qty").innerHTML = json.qty;
                     $('.menu-item[data-index="' + item_id + '"]').remove();
+                    document.getElementById("total").innerHTML = json.total;
                 },
                 error: function (xhr, errmsg, err) {
 
