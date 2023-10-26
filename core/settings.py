@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'tacobar',
     'cart',
+    'account',
 ]
 
 MIDDLEWARE = [
@@ -131,3 +132,13 @@ STATICFILES_DIRS = [ BASE_DIR / 'static']
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 # MEDIA_ROOT = BASE_DIR / 'media'
+
+# custom model
+AUTH_USER_MODEL = 'account.UserBase'
+LOGIN_REDIRECT_URL = '/account/create'
+LOGIN_URL = 'account/login'
+
+
+# django_phonenumberfield
+PHONENUMBER_DB_FORMAT = 'NATIONAL'
+PHONENUMBER_DEFAULT_REGION = 'US'
