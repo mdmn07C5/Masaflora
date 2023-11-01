@@ -1,6 +1,14 @@
 from django.test import TestCase
 
-from catalogue.models import Category, MenuItem
+from catalogue.models import Category, MenuItem, Store
+
+class TestStoresModel(TestCase):
+    
+    def setUp(self):
+        self.data1 = Store.objects.create(
+            name='Test Store 1', slug='test-store-1', location='test store 1 location', contact='(332)123-4567'
+        )
+    
 
 
 class TestCategoriesModel(TestCase):

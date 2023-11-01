@@ -1,6 +1,22 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Category, MenuItem
+from .models import Category, MenuItem, Store
 
+
+def store_all(request):
+    stores = Store.objects.all()
+    return render(
+        request=request,
+        template_name='catalogue/stores/stores.html',
+        context={'stores':stores}
+    )
+
+def store_list(request, store_slug):
+    store = get_object_or_404(Store, slug=store_slug)
+    return render(
+        request=request,
+        template_name='catalogue/stores/store_page.html',
+        context={'store':store}
+    )
 
 def category_list(request, category_slug):
     category = get_object_or_404(Category, slug=category_slug)

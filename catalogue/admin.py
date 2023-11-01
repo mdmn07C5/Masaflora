@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Category, MenuItem
+from .models import Category, MenuItem, Store
 
 
 @admin.register(Category)
@@ -17,3 +17,9 @@ class MenuItemAdmin(admin.ModelAdmin):
     list_editable = ['price', 'short_description', 'is_available',
                      'full_description']
     prepopulated_fields = {'slug': ('name',)}
+
+@admin.register(Store)
+class StoreAdmin(admin.ModelAdmin):
+    list_display = ['name', 'location', 'opening_hours', 'closing_hours', 'contact']
+    prepopulated_fields = {'slug': ('name',)}
+    list_editable = ['opening_hours', 'closing_hours', 'contact']
