@@ -3,11 +3,12 @@ from django.test import TestCase
 from django.urls import reverse
 
 from catalogue.models import Category, MenuItem
+from account.models import UserBase
 
-class TestBasketView(TestCase):
+class TestCartView(TestCase):
 
     def setUp(self):
-        User.objects.create(username='admin')
+        UserBase.objects.create(user_name='admin')
         Category.objects.create(name='test_category', slug='test-category')
         MenuItem.objects.create(category_id=1, name='test dish', slug='test-dish', price=1.00, image="Nonelmao")
         MenuItem.objects.create(category_id=1, name='test dish 2', slug='test-dish-2', price=2.00, image="Nonelmao")

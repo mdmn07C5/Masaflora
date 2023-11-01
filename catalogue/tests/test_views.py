@@ -34,13 +34,13 @@ class TestViewResponses(TestCase):
         """Test menuitem reverse and status code
         """
         response = self.c.get(
-            reverse(viewname='tacobar:menuitem_detail', args=['test-dish']))
+            reverse(viewname='catalogue:menuitem_detail', args=['test-dish']))
         self.assertEqual(response.status_code, 200)
 
     def test_category_list_url(self):
         """Test category list reverse and status code"""
         response = self.c.get(
-            reverse(viewname='tacobar:category_list', args=['test-category']))
+            reverse(viewname='catalogue:category_list', args=['test-category']))
         self.assertEqual(response.status_code, 200)
 
     def test_homepage_html(self):
