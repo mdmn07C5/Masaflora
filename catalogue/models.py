@@ -1,12 +1,31 @@
 from django.db import models
 from django.db.models.query import QuerySet
 from django.urls import reverse
+from phonenumber_field.modelfields import PhoneNumberField
+
+
+class Store(models.Model):
+    name = models.CharField(max_length=255, db_index=True)
+    slug = models.SlugField(max_length=255, unique=True)
+    location = models.CharField(max_length=255)
+    contact = PhoneNumberField(region='US')
+    opening_hours = models.TimeField()
+    closing_hours = models.TimeField()
+
+    class Meta:
+        verbose_name_plural = 'stores'
+    
+    def get_absolute_url(self):
+        return reverse(
+            viewname='catalog:store_list',
+            args=[self.slug]
+        )
 
 
 class Category(models.Model):
     name = models.CharField(max_length=255, db_index=True)
     slug = models.SlugField(max_length=255, unique=True)
-    description = models.CharField(max_length=255)
+    description = models.CharField(max_length=255, blank=True)
 
     class Meta:
         verbose_name_plural = 'categories'
