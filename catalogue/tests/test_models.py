@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from tacobar.models import Category, MenuItem
+from catalogue.models import Category, MenuItem
 
 
 class TestCategoriesModel(TestCase):

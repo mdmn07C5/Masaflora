@@ -5,8 +5,8 @@ from django.conf import settings
 from django.test import TestCase, Client, RequestFactory
 from django.urls import reverse
 from django.http import HttpRequest
-from tacobar.models import Category, MenuItem
-from tacobar.views import menu_all
+from catalogue.models import Category, MenuItem
+from catalogue.views import menu_all
 
 # @skip("dummy test to identify which tests are done first")
 # class TestSkip(TestCase):

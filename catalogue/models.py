@@ -13,7 +13,7 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         return reverse(
-            viewname='tacobar:category_list',
+            viewname='catalogue:category_list',
             args=[self.slug]
         )
 
@@ -49,7 +49,7 @@ class MenuItem(models.Model):
 
     def get_absolute_url(self):
         return reverse(
-            viewname='tacobar:menuitem_detail',
+            viewname='catalogue:menuitem_detail',
             args=[self.slug]
         )
 

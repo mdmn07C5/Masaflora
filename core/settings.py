@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'phonenumber_field',
-    'tacobar',
+    'catalogue',
     'cart',
 ]
 
@@ -67,7 +67,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'tacobar.context_processors.categories',
+                'catalogue.context_processors.categories',
                 'cart.context_processors.cart',
             ],
         },

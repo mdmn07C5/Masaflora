@@ -1,4 +1,4 @@
-from tacobar.models import MenuItem
+from catalogue.models import MenuItem
 from decimal import Decimal
 
 

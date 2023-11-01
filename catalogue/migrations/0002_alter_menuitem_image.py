@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('tacobar', '0001_initial'),
+        ('catalogue', '0001_initial'),
     ]
 
     operations = [
