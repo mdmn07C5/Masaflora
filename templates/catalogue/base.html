@@ -50,7 +50,7 @@
                                    aria-expanded="false">Menu</a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li>
-                                        <a class="dropdown-item" href="{% url "tacobar:menu_all" %}">All</a>
+                                        <a class="dropdown-item" href="{% url "catalogue:menu_all" %}">All</a>
                                     </li>
                                     {% for c in categories %}
                                         <li {% if category.slug == c.slug %}class="selected"{% endif %}>

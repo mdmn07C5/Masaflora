@@ -7,7 +7,7 @@ def category_list(request, category_slug):
     menuitems = MenuItem.objects.filter(category=category)
     return render(
         request=request,
-        template_name='tacobar/menu/category.html',
+        template_name='catalogue/menu/category.html',
         context={'category': category, 'menuitems': menuitems}
     )
 
@@ -16,7 +16,7 @@ def menu_all(request):
     menuitems = MenuItem.menuitems.all()
     return render(
         request=request,
-        template_name='tacobar/home.html',
+        template_name='catalogue/home.html',
         context={'menuitems': menuitems}
     )
 
@@ -25,6 +25,6 @@ def menuitem_detail(request, slug):
     menuitem = get_object_or_404(MenuItem, slug=slug, is_available=True)
     return render(
         request=request,
-        template_name='tacobar/menu/detail.html',
+        template_name='catalogue/menu/detail.html',
         context={'menuitem': menuitem}
     )
