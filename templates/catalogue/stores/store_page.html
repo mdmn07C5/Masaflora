@@ -1,20 +1,19 @@
 {% extends "../base.html" %}
 {% block content %}
-<section class="py-3 text-center container">
-    <div class="row py-lg-1">
-        <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-light">{{ store.name }}</h1>
-            <p class="lead text-body-secondary">{{ store.location }}</p>
-            <p>{{ store.contact }} {{ store.opening_hours }}-{{ store.closing_hours }}</p>
+    <section class="py-3 text-center container">
+        <div class="row py-lg-1">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-light">{{ store.name }}</h1>
+                <p class="lead text-body-secondary">{{ store.location }}</p>
+                <p>{{ store.contact }} {{ store.opening_hours }}-{{ store.closing_hours }}</p>
+            </div>
         </div>
-    </div>
-</section>
-{% for i in '0123' %}
-    <p>Category {{ i }}</p>
-    {% for j in '012345' %}
-    <div class="card container-fluid">Dish {{ j }}</div>
+    </section>
+    {% for category, items in menu.items %}
+        <p>{{ category }}</p>
+        {% for item in items %}
+            <p>{{ item }} - {{ item.price }}</p>
+            <p>{{ item.short_description }}</p>
+        {% endfor %}
     {% endfor %}
-{% endfor %}
-
 {% endblock content %}
-
