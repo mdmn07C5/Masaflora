@@ -5,7 +5,8 @@ from .models import Category, MenuItem, Store
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['name', 'slug']
+    list_display = ['name', 'slug', 'store']
+    list_editable = ['store']
     prepopulated_fields = {'slug': ('name',)}
 
 

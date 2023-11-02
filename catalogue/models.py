@@ -14,7 +14,7 @@ class Store(models.Model):
 
     class Meta:
         verbose_name_plural = 'stores'
-    
+
     def get_absolute_url(self):
         return reverse(
             viewname='catalogue:store_list',
@@ -24,8 +24,9 @@ class Store(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=255, db_index=True)
-    slug = models.SlugField(max_length=255, unique=True)
-    store = models.ForeignKey(Store, related_name='category', on_delete=models.CASCADE)
+    slug = models.SlugField(max_length=255)
+    store = models.ForeignKey(
+        Store, related_name='category', on_delete=models.CASCADE)
     description = models.CharField(max_length=255, blank=True)
 
     class Meta:
