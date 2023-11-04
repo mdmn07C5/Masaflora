@@ -17,9 +17,6 @@ db.sqlite3-journal
 .coverage
 /htmlcov
 
-# Static shit for app
-/blog/templates/blog/icons/
-
 # Windows
 Thumbs.db*
 ehthumbs*.db
@@ -35,3 +32,6 @@ $RECYCLE.BIN/
 # secret memes
 TODO
 SPEC
+
+# 
+templates\drafts
