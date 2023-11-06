@@ -1,4 +1,5 @@
 {% extends "../base.html" %}
+{% load static %}
 {% block content %}
     <section class="py-3 text-center container">
         <div class="row py-lg-1">
@@ -13,7 +14,8 @@
     <div class="bg-body-tertiary">
         <div class="container-md accordion">
             {% for category, items in menu.items %}
-                <div class="row border pt-1 accordion-item">
+                <div class="row border pt-1 accordion-item"
+                     id="category-{{ category.slug }}">
                     <h5 class="display-6 fw-bold text-center accordion-header">
                         <button class="accordion-button"
                                 type="button"
@@ -28,27 +30,27 @@
                             <div class="row border accordion-body bg-white">
                                 {% for item in items %}
                                     <div class="col-sm-6">
-                                        <div class="card mx-1 my-2">
+                                        <div class="card mx-1 my-2 cack">
                                             <div class="row">
-                                                <div class="col-md-4 ">
-                                                    <img class="img-fluid mx-auto d-block" width="200px" height"200px" alt="Responsive image" src={{ item.image.url }}>
+                                                <div class="col-md-3 ">
+                                                    <img class="img-fluid mx-auto d-block" width="128px" height="128px" alt="Responsive image" src={{ item.image.url }}>
                                                 </div>
-                                                <div class="col-md-8">
+                                                <div class="col-md-9">
                                                     <div class="card-body">
                                                         <div class="row justify-content-between">
-                                                            <div class="col-8 card-title">{{ item.name }}</div>
+                                                            <div class="col-8 card-title stacked-title">{{ item.name }}</div>
                                                             <div class="col-auto">
                                                                 <small class="opacity-50">${{ item.price }}</small>
                                                             </div>
                                                         </div>
-                                                        <p class="card-text">
+                                                        <p class="card-text stacked-summary">
                                                             <small class="text-body-secondary">{{ item.short_description }}</small>
                                                         </p>
-                                                        <p class="card-text">{{ item.full_description }}</p>
-                                                        <div class="row align-items-end">
+                                                        <small class="card-text line-clamp truncate">{{ item.full_description }}</small>
+                                                        {% comment %} <div class="row align-items-end border">
                                                             <div class="col-6">placeholder for shit</div>
                                                             <div class="col-6">placeholder for shit</div>
-                                                        </div>
+                                                        </div>  {% endcomment %}
                                                     </div>
                                                 </div>
                                             </div>
