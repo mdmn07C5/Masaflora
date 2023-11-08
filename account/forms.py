@@ -7,7 +7,7 @@ class RegistrationForm(forms.ModelForm):
     email = forms.EmailField(max_length=255, help_text='Required', error_messages={'required': 'Email required.'})
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Repeat password', widget=forms.PasswordInput)
-    contact_number = PhoneNumberField(label='Phone Number', help_text='Required', error_messages={'required': 'Email required.'})
+    contact_number = PhoneNumberField(label='Phone Number', help_text='Required', error_messages={'required': 'contact number required.'}, region='US')
 
     class Meta:
         model = UserBase

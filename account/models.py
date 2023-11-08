@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.mail import send_mail
 from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager, PermissionsMixin)
 from phonenumber_field.modelfields import PhoneNumberField
 from django.utils.translation import gettext_lazy as _ # for translating later on
@@ -55,4 +56,13 @@ class UserBase(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.user_name
+    
+    def email_user(self, subject, message):
+        send_mail(
+            subject,
+            message,
+            'peepee@poo.poo',
+            [self.email],
+            fail_silently=False
+        )
     

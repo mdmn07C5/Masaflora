@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
@@ -9,7 +10,6 @@ from .token import account_activation_token
 from .models import UserBase
 
 def account_register(request):
-
     if request.user.is_authenticated:
         return redirect('/')
 
@@ -17,11 +17,10 @@ def account_register(request):
         register_form = RegistrationForm(request.POST)
         if register_form.is_valid():
             user = register_form.save(commit=False)
+            user.user_name = register_form.cleaned_data['user_name']
             user.email = register_form.cleaned_data['email']
             user.set_password(register_form.cleaned_data['password'])
-            # user.contact_number(register_form.cleaned_data['contact_number'])
-            user.delivery_address(
-                register_form.cleaned_data['delivery_address'])
+            user.contact_number = register_form.cleaned_data['contact_number']
             user.is_active = False
             user.save()
 
@@ -30,11 +29,12 @@ def account_register(request):
             subject = 'Activate your Account'
             message = render_to_string('account/registration/account_activation_email.html', {
                 'user': user,
-                'domain': current_site.doomain,
+                'domain': current_site.domain,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                 'token': account_activation_token.make_token(user),
             })
             user.email_user(subject=subject, message=message)
+            return HttpResponse('registered succesfully and activation sent')
 
     else:
         register_form = RegistrationForm()
