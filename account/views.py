@@ -14,7 +14,7 @@ from .models import UserBase
 
 def account_register(request):
     if request.user.is_authenticated:
-        return redirect('/')
+        return redirect('account:dashboard')
 
     if request.method == 'POST':
         register_form = RegistrationForm(request.POST)
@@ -47,10 +47,6 @@ def account_register(request):
             context={'form': register_form})
 
 
-def account_login(request):
-    pass
-
-
 def account_activate(request, uidb64, token):
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))
@@ -75,5 +71,4 @@ def account_activate(request, uidb64, token):
 def dashboard(request):
     return render(
         request=request,
-        template_name='account/user/dashboard.html',
-    )
+        template_name='account/user/dashboard.html',)

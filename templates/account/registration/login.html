@@ -16,14 +16,16 @@
                                     {% csrf_token %}
                                     <h3 class="mb-4">Sign In</h3>
                                     {% if form.errors %}
-                                        <div class="alert alert-primary" role="alert">Error: Username or Password does not match</div>
+                                        {% comment %} <div class="alert alert-primary" role="alert">Error: Username or Password does not match</div>
+                                         {% endcomment %}
+                                         {{ form.errors }}
                                     {% endif %}
                                     <label class="form-label">{{ form.username.label }}</label>
                                     {{ form.username }}
                                     <label class="form-label">{{ form.password.label }}</label>
                                     {{ form.password }}
                                     <div class="d-grid gap-2">
-                                        <input type="hidden" name="next" value="{{ next }}">
+                                        {% comment %} <input type="hidden" name="next" value="{{ next }}"> {% endcomment %}
                                         <button class="btn btn-primary py-2 mb-4 mt-5 fw-bold"
                                                 type="submit"
                                                 value="Log-in">Sign in</button>
