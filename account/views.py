@@ -1,6 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.sites.shortcuts import get_current_site
+from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -8,6 +10,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from .forms import RegistrationForm
 from .token import account_activation_token
 from .models import UserBase
+
 
 def account_register(request):
     if request.user.is_authenticated:
@@ -39,28 +42,38 @@ def account_register(request):
     else:
         register_form = RegistrationForm()
         return render(
-            request=request, 
-            template_name='account/registration/register.html', 
+            request=request,
+            template_name='account/registration/register.html',
             context={'form': register_form})
-    
+
+
 def account_login(request):
     pass
+
 
 def account_activate(request, uidb64, token):
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))
         user = UserBase.objects.get(pk=uid)
-    except(TypeError, ValueError, OverflowError, user.DoesNotExist):
+    except (TypeError, ValueError, OverflowError, user.DoesNotExist):
         user = None
     if user and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
-        # login(request, user)
+        login(request, user)
         return redirect(
-            to='account/dashboard'
+            to='account:dashboard'
         )
     else:
         return render(
             request=request,
             template_name='account/registration/activation_invalid.html'
         )
+
+
+@login_required
+def dashboard(request):
+    return render(
+        request=request,
+        template_name='account/user/dashboard.html',
+    )

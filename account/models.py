@@ -10,7 +10,7 @@ class CustomAccountManager(BaseUserManager):
     def create_superuser(self, email, user_name, password, **other_fields):
         other_fields.setdefault('is_staff', True)
         other_fields.setdefault('is_superuser', True)
-        other_fields.setdefault('is_sactive', True)
+        other_fields.setdefault('is_active', True)
 
         if not other_fields.get('is_staff'):
             raise ValueError(
