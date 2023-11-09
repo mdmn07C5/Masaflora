@@ -1,5 +1,6 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
+from django.views.generic import TemplateView
 from . import views
 from .forms import (UserLoginForm)
 
@@ -15,4 +16,6 @@ urlpatterns = [
     # dashboard's shit
     path('dashboard/', views.dashboard, name='dashboard'),
     path('profile/edit/', views.edit_details, name='edit_details'),
+    path('profile/deactivate_user', views.deactivate_user, name='deactivate_user'),
+    path('profile/deactivate_confirm', TemplateView.as_view(template_name='account/user/deactivate_confirm.html'), name='deactivate_confirm'),
 ]

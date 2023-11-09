@@ -92,3 +92,10 @@ def edit_details(request):
         context={'user_form': user_form}
     )
         
+@login_required
+def deactivate_user(request):
+    user = UserBase.objects.get(user_name=request.user)
+    user.is_active = False
+    user.save()
+    logout(request)
+    return redirect('account:deactivate_confirm')
