@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from .models import UserBase
 from phonenumber_field.formfields import PhoneNumberField
+from phonenumber_field.widgets import RegionalPhoneNumberWidget
 
 
 class RegistrationForm(forms.ModelForm):
@@ -57,3 +58,27 @@ class UserLoginForm(AuthenticationForm):
         attrs={'class': 'form-control mb-3', 'placeholder': 'Username', 'id': 'login-username'}))
     password = forms.CharField(widget=forms.PasswordInput(
         attrs={'class': 'form-control', 'placeholder': 'Password', 'id': 'login-pwd'}))
+
+
+class UserEditForm(forms.ModelForm):
+    email = forms.EmailField(
+        label='Account email', max_length=200, widget=forms.TextInput(
+            attrs={'class': 'form-control mb-3', 'placeholder': 'email', 'id': 'form-email'}))
+
+    user_name = forms.CharField(
+        label='User Name', min_length=4, max_length=50, widget=forms.TextInput(
+            attrs={'class': 'form-control mb-3', 'placeholder': 'Username', 'id': 'form-user-name', 'readonly': 'readonly'}))
+
+    contact_number = PhoneNumberField(
+        region='US', label='contact number', widget=RegionalPhoneNumberWidget(region='US', 
+            attrs={'class': 'form-control mb-3', 'placeholder': '123-456-7890', 'id': 'form-contact-number'}))
+
+    class Meta:
+        model = UserBase
+        fields = ('email', 'user_name', 'contact_number',)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['user_name'].required = True
+        self.fields['email'].required = True
+        self.fields['contact_number'].required = True
