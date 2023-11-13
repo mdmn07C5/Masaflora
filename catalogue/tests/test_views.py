@@ -5,8 +5,8 @@ from django.conf import settings
 from django.test import TestCase, Client, RequestFactory
 from django.urls import reverse
 from django.http import HttpRequest
-from catalogue.models import Category, MenuItem
-from catalogue.views import menu_all
+from catalogue.models import Category, MenuItem, Store
+from catalogue.views import menu_all, store_page, store_all
 
 # @skip("dummy test to identify which tests are done first")
 # class TestSkip(TestCase):
@@ -18,7 +18,8 @@ class TestViewResponses(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
         self.c = Client()
-        Category.objects.create(name='test-category', slug='test-category')
+        self.store = Store.objects.create(name='Test Store 1', slug='test-store-1', location='test store 1 location', contact='(332)123-4567', opening_hours = '8:00', closing_hours='10:00')
+        self.category = Category.objects.create(name='test-category', slug='test-category', store_id=1)
         self.data1 = MenuItem.objects.create(
             category_id=1, name='test1', slug='test-dish', price=420.69, image="Nonelmao")
 
@@ -55,3 +56,24 @@ class TestViewResponses(TestCase):
         self.assertTrue(html.startswith('\n<!DOCTYPE html>\n'))
         self.assertEqual(response.status_code, 200)
 
+    def test_store_page(self):
+        request = HttpRequest()
+        session_engine = import_module(settings.SESSION_ENGINE)
+        request.session = session_engine.SessionStore()
+        response = store_page(request, self.store.slug)
+
+        self.assertEqual(response.status_code, 200)
+        html = response.content.decode('utf8')
+        self.assertIn(self.store.name, html)
+        self.assertIn(self.category.name, html)
+        self.assertIn(self.data1.name, html)
+
+    def test_store_all(self):
+        request = HttpRequest()
+        session_engine = import_module(settings.SESSION_ENGINE)
+        request.session = session_engine.SessionStore()
+        response = store_all(request)
+
+        self.assertEqual(response.status_code, 200)
+        html = response.content.decode('utf8')
+        self.assertIn(self.store.name, html)

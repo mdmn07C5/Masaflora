@@ -1,0 +1,67 @@
+{% extends "../base.html" %}
+{% load static %}
+{% block content %}
+    <section class="py-3 text-center container">
+        <div class="row py-lg-1">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-light">{{ store.name }}</h1>
+                <p class="lead text-body-secondary">{{ store.location }}</p>
+                <p>{{ store.contact }} {{ store.opening_hours }}-{{ store.closing_hours }}</p>
+            </div>
+        </div>
+    </section>
+    {% comment %} start of menu {% endcomment %}
+    <div class="bg-body-tertiary">
+        <div class="container-md accordion">
+            {% for category, items in menu.items %}
+                <div class="row border pt-1 accordion-item"
+                     id="category-{{ category.slug }}">
+                    <h5 class="display-6 fw-bold text-center accordion-header">
+                        <button class="accordion-button"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#panelsStayOpen-collapse-{{ category.slug }}"
+                                aria-expanded="true"
+                                aria-controls="panelsStayOpen-collapseOne">{{ category.name }}</button>
+                    </h5>
+                    <div id="panelsStayOpen-collapse-{{ category.slug }}"
+                         class="accordion-collapse collapse show">
+                        <div class="container-fluid border">
+                            <div class="row border accordion-body bg-white">
+                                {% for item in items %}
+                                    <div class="col-sm-6">
+                                        <div class="card mx-1 my-2 cack">
+                                            <div class="row">
+                                                <div class="col-md-3 ">
+                                                    <img class="img-fluid mx-auto d-block" width="128px" height="128px" alt="Responsive image" src={{ item.image.url }}>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <div class="card-body">
+                                                        <div class="row justify-content-between">
+                                                            <div class="col-8 card-title stacked-title">{{ item.name }}</div>
+                                                            <div class="col-auto">
+                                                                <small class="opacity-50">${{ item.price }}</small>
+                                                            </div>
+                                                        </div>
+                                                        <p class="card-text stacked-summary">
+                                                            <small class="text-body-secondary">{{ item.short_description }}</small>
+                                                        </p>
+                                                        <small class="card-text line-clamp truncate">{{ item.full_description }}</small>
+                                                        {% comment %} <div class="row align-items-end border">
+                                                            <div class="col-6">placeholder for shit</div>
+                                                            <div class="col-6">placeholder for shit</div>
+                                                        </div>  {% endcomment %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}
