@@ -17,7 +17,7 @@ class MenuItem(models.Model):
         max_length=255, blank=True, help_text='Short description or translation if dish name is not in English.')
     full_description = models.TextField(blank=True)
     image = models.ImageField(
-        upload_to='images/', default='images/default.png')
+        upload_to='images/', default='images/default.png', null=True)
     slug = models.SlugField(max_length=255)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     is_available = models.BooleanField(default=True)
