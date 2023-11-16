@@ -26,7 +26,8 @@
         <link rel="stylesheet" href="{% static 'cart/css/cart.css' %}">
         <link rel="stylesheet" href="{% static 'stores/css/store_page.css' %}">
     </head>
-    <body class="min-vh-100">
+    <body class="container-fluid ">
+        {% comment %} top bar begin {% endcomment %}
         <header>
             <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom">
                 <div class="container-fluid">
@@ -84,33 +85,42 @@
                     </button>
                     {% comment %} shows door if not logged in, otherwise {% endcomment %}
                     {% if user.is_authenticated %}
-                    <a type="button" role="button" href="{% url "account:logout" %}"
-                        class="btn btn-outline-secondary border-0 basket-btn">
-                        <div>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
-                                class="bi bi-door-closed" viewBox="0 0 16 16">
-                                <path
-                                    d="M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2zm1 13h8V2H4v13z" />
-                                <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z" />
-                            </svg>
-                        </div>
-                        <span class="fs15 fw500">Logout</span>
-                    </a>
+                        <a type="button"
+                           role="button"
+                           href="{% url "account:logout" %}"
+                           class="btn btn-outline-secondary border-0 basket-btn">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     width="22"
+                                     height="22"
+                                     fill="currentColor"
+                                     class="bi bi-door-closed"
+                                     viewBox="0 0 16 16">
+                                    <path d="M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2zm1 13h8V2H4v13z" />
+                                    <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z" />
+                                </svg>
+                            </div>
+                            <span class="fs15 fw500">Logout</span>
+                        </a>
                     {% else %}
-                    <a type="button" role="button" href=""
-                        class="btn btn-outline-secondary border-0 basket-btn">
-                        <div>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
-                                class="bi bi-door-closed" viewBox="0 0 16 16">
-                                <path
-                                    d="M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2zm1 13h8V2H4v13z" />
-                                <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z" />
-                            </svg>
-                        </div>
-                        <span class="fs15 fw500">Login</span>
-                    </a>
+                        <a type="button"
+                           role="button"
+                           href=""
+                           class="btn btn-outline-secondary border-0 basket-btn">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     width="22"
+                                     height="22"
+                                     fill="currentColor"
+                                     class="bi bi-door-closed"
+                                     viewBox="0 0 16 16">
+                                    <path d="M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2zm1 13h8V2H4v13z" />
+                                    <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z" />
+                                </svg>
+                            </div>
+                            <span class="fs15 fw500">Login</span>
+                        </a>
                     {% endif %}
-
                     <a type="button"
                        role="button"
                        href="{% url "cart:cart_summary" %}"
@@ -134,7 +144,7 @@
                                 <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
                             </svg>
                         </div>
-                        <span class="fs15 fw500"> Bag </span>
+                        <span class="fs15 fw500">Bag</span>
                     </a>
                 </div>
                 {% comment %} only for mobile view {% endcomment %}
@@ -147,10 +157,37 @@
                 </form>
             </nav>
         </header>
-        <div id="content">
-            {% block content %}
-            {% endblock content %}
+        {% comment %} top bar end {% endcomment %}
+        <div class="row overflow-auto">
+            {% comment %} sidebar begin {% endcomment %}
+            <div class="col-12 col-sm-3 col-xl-2 px-sm-2 px-0 bg-dark d-flex sticky-top">
+                <div class="d-flex flex-sm-column flex-row flex-grow-1 align-items-center align-items-sm-start px-3 pt-2 text-white">
+                    {% comment %} <a href="/" class="d-flex align-items-center pb-sm-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                        <span class="fs-5">B<span class="d-none d-sm-inline">rand</span></span>
+                    </a> {% endcomment %}
+                    <ul class="nav nav-pills flex-sm-column flex-row flex-shrink-1 flex-sm-grow-0 flex-grow-1 mb-sm-auto mb-0 justify-content-center align-items-center align-items-sm-start"
+                        id="menu">
+                        {% for c in categories %}
+                            <li class="nav-item">
+                                <a href="#" class="nav-link px-sm-0 px-2">
+                                    <span class="ms-1 d-sm-inline">{{ c.name }}</span>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            {% comment %} sidebar end{% endcomment %}
+            <main class="col d-flex flex-column">
+                {% comment %} content begin {% endcomment %}
+                <section class="col d-flex flex-column" id="content">
+                    {% block content %}
+                    {% endblock content %}
+                </section>
+                {% comment %} content end {% endcomment %}
+            </main>
         </div>
+        {% comment %} footer begin {% endcomment %}
         <footer class="mt-auto d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
             <div class="col-md-4 d-flex align-items-center">
                 <a href="/"
@@ -161,6 +198,7 @@
                 </a>
                 <span class="mb-3 mb-md-0 text-body-secondary">© 2023 Company, Inc</span>
             </div>
+            {% comment %} socials begin {% endcomment %}
             <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
                 <li class="ms-3">
                     <a class="text-body-secondary" href="#">
@@ -193,6 +231,8 @@
                     </a>
                 </li>
             </ul>
+            {% comment %} socials  end {% endcomment %}
         </footer>
+        {% comment %} footer end {% endcomment %}
     </body>
 </html>
