@@ -51,3 +51,11 @@ def menuitem_detail(request, slug):
         template_name='catalogue/menu/detail.html',
         context={'menuitem': menuitem}
     )
+
+def menu(request):
+    menuitems = MenuItem.menuitems.all()
+    return render(
+        request=request,
+        template_name='catalogue/menu/menu.html',
+        context={'menuitems': menuitems}
+    )
