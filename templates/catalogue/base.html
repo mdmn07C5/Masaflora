@@ -26,12 +26,12 @@
         <link rel="stylesheet" href="{% static 'cart/css/cart.css' %}">
         <link rel="stylesheet" href="{% static 'stores/css/store_page.css' %}">
     </head>
-    <body class="container-fluid ">
+    <body class="container-fluid">
         {% comment %} top bar begin {% endcomment %}
         <header>
-            <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom">
+            <nav class="fixed-top navbar navbar-expand-md navbar-light bg-white border-bottom position">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="/">Tacobar</a>
+                    <a class="navbar-brand" href="/">Logo Place Holder</a>
                     <button class="navbar-toggler"
                             type="button"
                             data-bs-toggle="collapse"
@@ -165,7 +165,7 @@
         {% comment %} content end {% endcomment %}
         
         {% comment %} footer begin {% endcomment %}
-        <footer class="mt-auto d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+        <footer class="fixed-bottom mt-auto d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
             <div class="col-md-4 d-flex align-items-center">
                 <a href="/"
                    class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">

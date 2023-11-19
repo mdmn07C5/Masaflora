@@ -2,6 +2,24 @@
 {% load static %}
 {% block title %}RestaurantHomepage{% endblock title %}
 {% block content %}
+    <div class="float-start">
+
+            {% comment %} <div class="col d-flex flex-column"> {% endcomment %}
+                <div class="d-flex flex-sm-column flex-row align-items-center align-items-sm-start px-3 pt-2 text-white">
+                    <ul class="nav nav-pills flex-sm-column flex-row flex-shrink-1 flex-sm-grow-0 flex-grow-1 mb-sm-auto mb-0 justify-content-center align-items-center align-items-sm-start position-fixed"
+                        id="menu-categories">
+                        <li class="nav-item">
+                        {% for c in categories %}
+                                <a href="#menu-category-{{ c.name }}" class="nav-link px-sm-0 px-2">
+                                    <span class="ms-1 d-sm-inline">{{ c.name }}</span>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% comment %} </div> {% endcomment %}
+
+    </div>
     <section class="py-5 text-center container">
         <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
