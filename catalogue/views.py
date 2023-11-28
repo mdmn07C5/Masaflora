@@ -6,8 +6,8 @@ def store_all(request):
     stores = Store.objects.all()
     return render(
         request=request,
-        template_name='catalogue/stores/stores.html',
-        context={'stores': stores}
+        template_name="catalogue/stores/stores.html",
+        context={"stores": stores},
     )
 
 
@@ -17,11 +17,8 @@ def store_page(request, store_slug):
 
     return render(
         request=request,
-        template_name='catalogue/stores/store_page.html',
-        context={
-            'store': store,
-            'menu': menu
-        }
+        template_name="catalogue/stores/store_page.html",
+        context={"store": store, "menu": menu},
     )
 
 
@@ -30,8 +27,8 @@ def category_list(request, category_slug):
     menuitems = MenuItem.objects.filter(category=category)
     return render(
         request=request,
-        template_name='catalogue/menu/category.html',
-        context={'category': category, 'menuitems': menuitems}
+        template_name="catalogue/menu/category.html",
+        context={"category": category, "menuitems": menuitems},
     )
 
 
@@ -39,8 +36,8 @@ def menu_all(request):
     menuitems = MenuItem.menuitems.all()
     return render(
         request=request,
-        template_name='catalogue/home.html',
-        context={'menuitems': menuitems}
+        template_name="catalogue/home.html",
+        context={"menuitems": menuitems},
     )
 
 
@@ -48,14 +45,15 @@ def menuitem_detail(request, slug):
     menuitem = get_object_or_404(MenuItem, slug=slug, is_available=True)
     return render(
         request=request,
-        template_name='catalogue/menu/detail.html',
-        context={'menuitem': menuitem}
+        template_name="catalogue/menu/detail.html",
+        context={"menuitem": menuitem},
     )
+
 
 def menu(request):
     menuitems = MenuItem.menuitems.all()
     return render(
         request=request,
-        template_name='catalogue/menu/menu.html',
-        context={'menuitems': menuitems}
+        template_name="catalogue/menu/menu.html",
+        context={"menuitems": menuitems},
     )
