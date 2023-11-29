@@ -40,7 +40,7 @@ class MenuItem(models.Model):
         ordering = ("-created",)
 
     def get_absolute_url(self):
-        return reverse(viewname="catalogue:menuitem_detail", args=[self.slug])
+        return reverse(viewname="catalogue:detail", args=[self.slug])
 
     def __str__(self):
         return self.name

@@ -27,8 +27,8 @@
         <link rel="stylesheet" href="{% static 'stores/css/store_page.css' %}">
     </head>
     <body class="container-fluid">
-        {% comment %} top bar begin {% endcomment %}
         <header>
+            {% comment %} top bar begin {% endcomment %}
             <nav class="fixed-top navbar navbar-expand-md navbar-light bg-white border-bottom position">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="/">Logo Place Holder</a>
@@ -44,22 +44,13 @@
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <ul class="navbar-nav me-auto mb-2 mb-md-0">
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle"
-                                   href="#"
-                                   id="navbarDropdown"
-                                   role="button"
-                                   data-bs-toggle="dropdown"
-                                   aria-expanded="false">Menu</a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li>
-                                        <a class="dropdown-item" href="{% url "catalogue:menu_all" %}">All</a>
-                                    </li>
-                                    {% for c in categories %}
-                                        <li {% if category.slug == c.slug %}class="selected"{% endif %}>
-                                            <a class="dropdown-item" href="{{ c.get_absolute_url }}">{{ c.name|title }}</a>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
+                                <a class="nav-link active" href="#">Menu</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">Locations</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">Catering</a>
                             </li>
                         </ul>
                     </div>
@@ -147,25 +138,13 @@
                         <span class="fs15 fw500">Bag</span>
                     </a>
                 </div>
-                {% comment %} only for mobile view {% endcomment %}
-                <form class="d-flex w-100 d-md-none">
-                    <input class="form-control me-2"
-                           type="search"
-                           placeholder="Search products or FAQ"
-                           aria-label="Search">
-                    <button class="btn btn-outline-secondary" type="submit">Search</button>
-                </form>
             </nav>
+            {% comment %} top bar end {% endcomment %}
         </header>
-        {% comment %} top bar end {% endcomment %}
-        
-        {% comment %} content begin {% endcomment %}
-            {% block content %}
-            {% endblock content %}
-        {% comment %} content end {% endcomment %}
-        
+        {% block content %}
+        {% endblock content %}
         {% comment %} footer begin {% endcomment %}
-        <footer class="fixed-bottom mt-auto d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+        <footer class="mt-auto d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
             <div class="col-md-4 d-flex align-items-center">
                 <a href="/"
                    class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
