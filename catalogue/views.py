@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Category, MenuItem, Store
+from .models import Category, MenuItem, Store, Option
 
 
 def store_all(request):

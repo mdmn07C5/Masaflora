@@ -10,8 +10,15 @@ class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
 
 
+class OptionsInline(admin.TabularInline):
+    model = Option.item.through
+
+
 @admin.register(MenuItem)
 class MenuItemAdmin(admin.ModelAdmin):
+    inlines = [
+        OptionsInline,
+    ]
     list_display = [
         "name",
         "price",
@@ -36,9 +43,7 @@ class StoreAdmin(admin.ModelAdmin):
 
 @admin.register(Option)
 class StoreAdmin(admin.ModelAdmin):
+    inlines = [OptionsInline]
     list_display = ["name", "price"]
-    list_editable = [
-        "name",
-        "price",
-    ]
+    list_editable = ["name", "price"]
     list_display_links = None

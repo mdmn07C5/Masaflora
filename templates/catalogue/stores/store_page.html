@@ -49,10 +49,12 @@
                                                             <small class="text-body-secondary">{{ item.alt_text }}</small>
                                                         </p>
                                                         <small class="card-text line-clamp truncate">{{ item.description }}</small>
-                                                        {% comment %} <div class="row align-items-end border">
-                                                            <div class="col-6">placeholder for shit</div>
-                                                            <div class="col-6">placeholder for shit</div>
-                                                        </div>  {% endcomment %}
+                                                        <div class="row align-items-end border">
+                                                            {% for op in item.option_set.all %}
+                                                                <div class="col-6">{{ op.name }}</div>
+                                                                <div class="col-6">${{ op.price }}</div>
+                                                            {% endfor %}  
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
