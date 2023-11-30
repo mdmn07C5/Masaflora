@@ -98,7 +98,8 @@ class Store(models.Model):
 class Option(models.Model):
     name = models.CharField(max_length=255)
     price = models.DecimalField(max_digits=6, decimal_places=2)
-    item = models.ManyToManyField(MenuItem)
+    item = models.ManyToManyField(MenuItem, blank=True)
+    category = models.ManyToManyField(Category, blank=True)
 
     class Meta:
         verbose_name_plural = "options"

@@ -1,5 +1,6 @@
 from django.contrib import admin
-
+from django.db import models
+from django.forms import TextInput, Textarea
 from .models import Category, MenuItem, Store, Option
 
 
@@ -31,6 +32,11 @@ class MenuItemAdmin(admin.ModelAdmin):
     ]
     list_filter = ["is_available"]
     list_editable = ["price", "alt_text", "is_available", "description"]
+
+    formfield_overrides = {
+        models.CharField: {"widget": TextInput(attrs={"size": "10"})},
+        models.TextField: {"widget": Textarea(attrs={"rows": 1, "cols": 40})},
+    }
     prepopulated_fields = {"slug": ("name",)}
 
 
@@ -43,7 +49,6 @@ class StoreAdmin(admin.ModelAdmin):
 
 @admin.register(Option)
 class StoreAdmin(admin.ModelAdmin):
-    inlines = [OptionsInline]
     list_display = ["name", "price"]
     list_editable = ["name", "price"]
     list_display_links = None
