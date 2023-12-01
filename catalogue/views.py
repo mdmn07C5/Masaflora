@@ -41,8 +41,10 @@ def menu_all(request):
     )
 
 
-def menuitem_detail(request, slug):
-    menuitem = get_object_or_404(MenuItem, slug=slug, is_available=True)
+def menuitem_detail(request, category_slug, slug):
+    menuitem = get_object_or_404(
+        MenuItem, slug=slug, category__slug=category_slug, is_available=True
+    )
     return render(
         request=request,
         template_name="catalogue/menu/detail.html",

@@ -12,7 +12,7 @@ urlpatterns = [
         RedirectView.as_view(url="bushwick-taco-company", permanent=False),
         name="menu_all",
     ),
-    path("menu/item/<slug:slug>", views.menuitem_detail, name="detail"),
+    path("<slug:category_slug>/<slug:slug>", views.menuitem_detail, name="detail"),
     path("<slug:store_slug>", views.store_page, name="store_page"),
     path("menu/<slug:category_slug>/", views.category_list, name="category_list"),
     # path('stores', views.store_all, name='all_stores'),

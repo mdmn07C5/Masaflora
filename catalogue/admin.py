@@ -4,15 +4,22 @@ from django.forms import TextInput, Textarea
 from .models import Category, MenuItem, Store, Option
 
 
+class OptionsInline(admin.TabularInline):
+    model = Option.item.through
+
+
+class OptionsCategoryInline(admin.TabularInline):
+    model = Option.category.through
+
+
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ["name", "slug", "store"]
     list_editable = ["store"]
+    inlines = [
+        OptionsCategoryInline,
+    ]
     prepopulated_fields = {"slug": ("name",)}
-
-
-class OptionsInline(admin.TabularInline):
-    model = Option.item.through
 
 
 @admin.register(MenuItem)
@@ -25,6 +32,7 @@ class MenuItemAdmin(admin.ModelAdmin):
         "price",
         "alt_text",
         "slug",
+        "category",
         "is_available",
         "description",
         "created",
