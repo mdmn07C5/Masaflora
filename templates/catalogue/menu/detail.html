@@ -12,9 +12,19 @@
                 <div class="col-md-7 col-lg-7 ps-md-3 ps-lg-5">
                     <h1 class="mb-0 h4">{{ menuitem.name|title }}</h1>
                     <p>
-                        <span class="lead">{{ menuitem.short_description }}</span>
+                        <span class="lead">{{ menuitem.alt_text }}</span>
                     </p>
-                    <p>{{ menuitem.full_description|slice:":355" }}...</p>
+                    {% if menuitem.description|length > 0 %}
+                        <p>{{ menuitem.description|slice:":355" }}</p>
+                    {% else %}
+                        <p>{{ menuitem.category.description|slice:":355" }}</p>
+                    {% endif %}
+                    {% for op in menuitem.option_set.all %}
+                        <small class="text-nowrap text-truncate" style="max-width: 50px;">{{ op.name }} - ${{ op.price }}</small>
+                    {% endfor %}
+                    {% for op in menuitem.category.option_set.all %}
+                        <small class="text-nowrap text-truncate" style="max-width: 50px;">{{ op.name }} - ${{ op.price }}</small>
+                    {% endfor %}
                     <div class="border">
                         <div class="col border-bottom">
                             <div class="row p-3">
@@ -53,7 +63,7 @@
                 type: "POST",
                 url: "{% url "cart:cart_add" %}",
                 data: {
-                    menuitemid: $("#add-to-cart-button").val(),
+                    menuitemid: $(this).val(),
                     menuitemqty: $("#select option:selected").val(),
                     csrfmiddlewaretoken: "{{ csrf_token }}",
                     action: "post"
