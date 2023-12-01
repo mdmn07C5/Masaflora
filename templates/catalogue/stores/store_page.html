@@ -17,7 +17,18 @@
                  data-bs-spy="scroll"
                  data-bs-target="#menu-categories">
                 {% for category, items in menu.items %}
-                    <h2 id="menu-category-{{ category.name }}" class="text-center mt-5">{{ category.name }}</h2>
+                    <div class="container">
+                        <div id="menu-category-{{ category.name }}"
+                             class="text-center mt-5 h2 text-danger">{{ category.name }}</div>
+                        <div class="row justify-content-center">
+                            <div class="col-8 text-center">{{ category.description }}</div>
+                        </div>
+                        <div class="row justify-content-around">
+                            {% for op in category.option_set.all %}
+                            <div class="col-2 text-success">{{ op.name }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
                     <div class="row row-cols-xl-3 row-cols-md-2 row-cols-sm-1 row-cols-1 g-3"
                          id="{{ category }}-row">
                         {% for menuitem in items %}
@@ -26,11 +37,9 @@
                                     {% comment %} card begin {% endcomment %}
                                     <div class="card shadow-sm">
                                         {% comment %} image {% endcomment %}
-                                 
                                         <img class="img-fluid"
                                              src="{{ menuitem.image.url }}"
                                              alt="Responsive image">
-                                      
                                         {% comment %} body {% endcomment %}
                                         <div class="card-body">
                                             <p class="card-text">
