@@ -1,0 +1,14 @@
+[
+    {
+        "model": "catalogue.store",
+        "pk": 1,
+        "fields": {
+            "name": "Bushwick Taco Company",
+            "slug": "bushwick-taco-company",
+            "location": "839 Knickerbocker Avenue, Brooklyn NY",
+            "contact": "+16466398831",
+            "opening_hours": "11:30:00",
+            "closing_hours": "10:30:00"
+        }
+    }
+]

@@ -1,0 +1,648 @@
+[
+    {
+        "model": "catalogue.menuitem",
+        "pk": 17,
+        "fields": {
+            "store": 1,
+            "category": 1,
+            "name": "Chips & Guacamole",
+            "price": "9.00",
+            "description": "Tortilla chips with guac.",
+            "alt_text": "",
+            "image": "images/default.png",
+            "slug": "chips-guacamole",
+            "is_available": true,
+            "created": "2023-11-30T21:45:32.448Z",
+            "updated": "2023-11-30T21:45:32.448Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 18,
+        "fields": {
+            "store": 1,
+            "category": 1,
+            "name": "BTC Papas Fritas",
+            "price": "6.00",
+            "description": "Hand cut fries topped with Cotija cheese, cilantro and BTC chili powder.",
+            "alt_text": "",
+            "image": "images/default.png",
+            "slug": "btc-papas-fritas",
+            "is_available": true,
+            "created": "2023-11-30T21:46:17.987Z",
+            "updated": "2023-11-30T21:46:17.987Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 19,
+        "fields": {
+            "store": 1,
+            "category": 1,
+            "name": "Nachos",
+            "price": "12.00",
+            "description": "Chips, beans, pickled jalape�o, Mexican cheese, sour crea, Pico de Gallo, and guacamole.",
+            "alt_text": "",
+            "image": "images/default.png",
+            "slug": "nachos",
+            "is_available": true,
+            "created": "2023-11-30T21:48:03.957Z",
+            "updated": "2023-11-30T21:48:03.957Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 20,
+        "fields": {
+            "store": 1,
+            "category": 2,
+            "name": "Birria Tacos",
+            "price": "14.95",
+            "description": "Juicy and tender shreded beef, slow-cooked in savory spices, served with warm corn tortillas with flavorful consomm� broth for dipping and sipping.",
+            "alt_text": "",
+            "image": "images/default.png",
+            "slug": "birria-tacos",
+            "is_available": true,
+            "created": "2023-11-30T21:54:44.937Z",
+            "updated": "2023-11-30T21:54:44.937Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 21,
+        "fields": {
+            "store": 1,
+            "category": 3,
+            "name": "Chileatole",
+            "price": "6.00",
+            "description": "Chile poblano, potatoes, corn.",
+            "alt_text": "",
+            "image": "images/default.png",
+            "slug": "chileatole",
+            "is_available": true,
+            "created": "2023-11-30T22:00:48.611Z",
+            "updated": "2023-11-30T22:00:48.611Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 22,
+        "fields": {
+            "store": 1,
+            "category": 3,
+            "name": "Pozole",
+            "price": "6.00",
+            "description": "Corn, red pepper, onions, and chile Guajillo",
+            "alt_text": "",
+            "image": "images/default.png",
+            "slug": "pozole",
+            "is_available": true,
+            "created": "2023-11-30T22:03:07.986Z",
+            "updated": "2023-11-30T22:03:07.986Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 23,
+        "fields": {
+            "store": 1,
+            "category": 4,
+            "name": "Pollo Asado",
+            "price": "4.25",
+            "description": "",
+            "alt_text": "Grilled Chicken",
+            "image": "images/default.png",
+            "slug": "pollo-asado",
+            "is_available": true,
+            "created": "2023-11-30T22:03:43.226Z",
+            "updated": "2023-11-30T22:03:43.226Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 24,
+        "fields": {
+            "store": 1,
+            "category": 4,
+            "name": "Tinga de Pollo",
+            "price": "4.25",
+            "description": "",
+            "alt_text": "Chipotle Chicken",
+            "image": "images/default.png",
+            "slug": "tinga-de-pollo",
+            "is_available": true,
+            "created": "2023-11-30T22:04:16.367Z",
+            "updated": "2023-11-30T22:04:16.367Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 25,
+        "fields": {
+            "store": 1,
+            "category": 4,
+            "name": "Chorizo",
+            "price": "4.25",
+            "description": "",
+            "alt_text": "Sausage",
+            "image": "images/default.png",
+            "slug": "chorizo",
+            "is_available": true,
+            "created": "2023-11-30T22:04:43.123Z",
+            "updated": "2023-11-30T22:04:43.123Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 26,
+        "fields": {
+            "store": 1,
+            "category": 5,
+            "name": "Pollo Asado",
+            "price": "11.00",
+            "description": "",
+            "alt_text": "Grilled Chicken",
+            "image": "images/default.png",
+            "slug": "pollo-asado",
+            "is_available": true,
+            "created": "2023-11-30T22:07:54.446Z",
+            "updated": "2023-11-30T22:07:54.446Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 27,
+        "fields": {
+            "store": 1,
+            "category": 5,
+            "name": "Tinga de Pollo",
+            "price": "11.00",
+            "description": "",
+            "alt_text": "Chipotle Chicken",
+            "image": "images/default.png",
+            "slug": "tinga-de-pollo",
+            "is_available": true,
+            "created": "2023-11-30T22:08:24.593Z",
+            "updated": "2023-11-30T22:08:24.593Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 28,
+        "fields": {
+            "store": 1,
+            "category": 5,
+            "name": "Chorizo",
+            "price": "11.00",
+            "description": "",
+            "alt_text": "Sausage",
+            "image": "images/default.png",
+            "slug": "chorizo",
+            "is_available": true,
+            "created": "2023-11-30T22:09:05.591Z",
+            "updated": "2023-11-30T22:09:05.591Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 29,
+        "fields": {
+            "store": 1,
+            "category": 6,
+            "name": "Pollo Asado",
+            "price": "12.00",
+            "description": "",
+            "alt_text": "Grilled Chicken",
+            "image": "images/default.png",
+            "slug": "pollo-asado",
+            "is_available": true,
+            "created": "2023-11-30T22:12:16.775Z",
+            "updated": "2023-11-30T22:12:16.775Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 30,
+        "fields": {
+            "store": 1,
+            "category": 6,
+            "name": "Tinga de Pollo",
+            "price": "12.00",
+            "description": "",
+            "alt_text": "Chipotle Chicken",
+            "image": "images/default.png",
+            "slug": "tinga-de-pollo",
+            "is_available": true,
+            "created": "2023-11-30T22:12:36.876Z",
+            "updated": "2023-11-30T22:12:36.876Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 31,
+        "fields": {
+            "store": 1,
+            "category": 6,
+            "name": "Chorizo",
+            "price": "12.00",
+            "description": "",
+            "alt_text": "Sausage",
+            "image": "images/default.png",
+            "slug": "chorizo",
+            "is_available": true,
+            "created": "2023-11-30T22:12:54.152Z",
+            "updated": "2023-11-30T22:12:54.152Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 32,
+        "fields": {
+            "store": 1,
+            "category": 7,
+            "name": "Pollo Asado",
+            "price": "10.00",
+            "description": "",
+            "alt_text": "Grilled Chicken",
+            "image": "images/default.png",
+            "slug": "pollo-asado",
+            "is_available": true,
+            "created": "2023-11-30T22:13:21.545Z",
+            "updated": "2023-11-30T22:13:21.545Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 33,
+        "fields": {
+            "store": 1,
+            "category": 7,
+            "name": "Tinga de Pollo",
+            "price": "10.00",
+            "description": "",
+            "alt_text": "Chipotle Chicken",
+            "image": "images/default.png",
+            "slug": "tinga-de-pollo",
+            "is_available": true,
+            "created": "2023-11-30T22:13:39.412Z",
+            "updated": "2023-11-30T22:13:39.412Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 34,
+        "fields": {
+            "store": 1,
+            "category": 7,
+            "name": "Chorizo",
+            "price": "10.00",
+            "description": "",
+            "alt_text": "Sausage",
+            "image": "images/default.png",
+            "slug": "chorizo",
+            "is_available": true,
+            "created": "2023-11-30T22:14:38.283Z",
+            "updated": "2023-11-30T22:14:38.283Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 35,
+        "fields": {
+            "store": 1,
+            "category": 8,
+            "name": "Pollo Asado",
+            "price": "11.00",
+            "description": "",
+            "alt_text": "Grilled Chicken",
+            "image": "images/default.png",
+            "slug": "pollo-asado",
+            "is_available": true,
+            "created": "2023-11-30T22:18:16.331Z",
+            "updated": "2023-11-30T22:18:16.331Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 36,
+        "fields": {
+            "store": 1,
+            "category": 8,
+            "name": "Tinga de Pollo",
+            "price": "11.00",
+            "description": "",
+            "alt_text": "Chipotle Chicken",
+            "image": "images/default.png",
+            "slug": "tinga-de-pollo",
+            "is_available": true,
+            "created": "2023-11-30T22:18:42.516Z",
+            "updated": "2023-11-30T22:18:42.516Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 37,
+        "fields": {
+            "store": 1,
+            "category": 8,
+            "name": "Carnitas",
+            "price": "11.00",
+            "description": "",
+            "alt_text": "Pork",
+            "image": "images/default.png",
+            "slug": "carnitas",
+            "is_available": true,
+            "created": "2023-11-30T22:19:10.094Z",
+            "updated": "2023-11-30T22:19:10.094Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 38,
+        "fields": {
+            "store": 1,
+            "category": 9,
+            "name": "Pollo Asado",
+            "price": "9.00",
+            "description": "",
+            "alt_text": "Grilled Chicken",
+            "image": "images/default.png",
+            "slug": "pollo-asado",
+            "is_available": true,
+            "created": "2023-11-30T22:19:31.591Z",
+            "updated": "2023-11-30T22:19:31.591Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 39,
+        "fields": {
+            "store": 1,
+            "category": 9,
+            "name": "Tinga de Pollo",
+            "price": "9.00",
+            "description": "",
+            "alt_text": "Chipotle Chicken",
+            "image": "images/default.png",
+            "slug": "tinga-de-pollo",
+            "is_available": true,
+            "created": "2023-11-30T22:19:47.129Z",
+            "updated": "2023-11-30T22:19:47.129Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 40,
+        "fields": {
+            "store": 1,
+            "category": 9,
+            "name": "Chorizo",
+            "price": "9.00",
+            "description": "",
+            "alt_text": "Sausage",
+            "image": "images/default.png",
+            "slug": "chorizo",
+            "is_available": true,
+            "created": "2023-11-30T22:20:03.299Z",
+            "updated": "2023-11-30T22:20:03.299Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 41,
+        "fields": {
+            "store": 1,
+            "category": 10,
+            "name": "Mexican",
+            "price": "10.00",
+            "description": "Mixed greens, guacamole, salsa fresca, BTC ancho chili, salad dressing.",
+            "alt_text": "",
+            "image": "images/default.png",
+            "slug": "mexican",
+            "is_available": true,
+            "created": "2023-11-30T22:24:18.299Z",
+            "updated": "2023-11-30T22:24:18.299Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 42,
+        "fields": {
+            "store": 1,
+            "category": 10,
+            "name": "BTC",
+            "price": "10.00",
+            "description": "Mixed greens topped with fresh tortilla strips, Cotija cheese, pickled red onions, tomatoe sand BTC ancho chili salad dressing.",
+            "alt_text": "",
+            "image": "images/default.png",
+            "slug": "btc",
+            "is_available": true,
+            "created": "2023-11-30T22:25:33.957Z",
+            "updated": "2023-11-30T22:25:33.957Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 43,
+        "fields": {
+            "store": 1,
+            "category": 11,
+            "name": "Pollo Asado",
+            "price": "5.75",
+            "description": "",
+            "alt_text": "Grilled Chicken",
+            "image": "images/default.png",
+            "slug": "pollo-asado",
+            "is_available": true,
+            "created": "2023-11-30T22:27:12.641Z",
+            "updated": "2023-11-30T22:27:12.641Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 44,
+        "fields": {
+            "store": 1,
+            "category": 11,
+            "name": "Tinga de Pollo",
+            "price": "5.75",
+            "description": "",
+            "alt_text": "Chipotle Chicken",
+            "image": "images/default.png",
+            "slug": "tinga-de-pollo",
+            "is_available": true,
+            "created": "2023-11-30T22:27:45.737Z",
+            "updated": "2023-11-30T22:27:45.737Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 45,
+        "fields": {
+            "store": 1,
+            "category": 11,
+            "name": "Chorizo",
+            "price": "5.75",
+            "description": "",
+            "alt_text": "Sausage",
+            "image": "images/default.png",
+            "slug": "chorizo",
+            "is_available": true,
+            "created": "2023-11-30T22:28:52.199Z",
+            "updated": "2023-11-30T22:28:52.200Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 46,
+        "fields": {
+            "store": 1,
+            "category": 12,
+            "name": "Queso Mixto",
+            "price": "12.00",
+            "description": "",
+            "alt_text": "Mixed Cheese",
+            "image": "images/default.png",
+            "slug": "queso-mixto",
+            "is_available": true,
+            "created": "2023-11-30T22:29:11.850Z",
+            "updated": "2023-11-30T22:29:11.850Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 47,
+        "fields": {
+            "store": 1,
+            "category": 12,
+            "name": "Pollo Asado",
+            "price": "13.00",
+            "description": "",
+            "alt_text": "Grilled Chicken",
+            "image": "images/default.png",
+            "slug": "pollo-asado",
+            "is_available": true,
+            "created": "2023-11-30T22:29:39.485Z",
+            "updated": "2023-11-30T22:29:39.485Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 48,
+        "fields": {
+            "store": 1,
+            "category": 12,
+            "name": "Carne Asada",
+            "price": "13.00",
+            "description": "",
+            "alt_text": "Grilled Steak",
+            "image": "images/default.png",
+            "slug": "carne-asada",
+            "is_available": true,
+            "created": "2023-11-30T22:30:03.674Z",
+            "updated": "2023-11-30T22:30:03.675Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 49,
+        "fields": {
+            "store": 1,
+            "category": 13,
+            "name": "Churros",
+            "price": "7.75",
+            "description": "Fried pastry dough rolled in cinnamon sugar served with chocolate.",
+            "alt_text": "",
+            "image": "images/default.png",
+            "slug": "churros",
+            "is_available": true,
+            "created": "2023-11-30T22:35:06.899Z",
+            "updated": "2023-11-30T22:35:06.899Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 50,
+        "fields": {
+            "store": 1,
+            "category": 13,
+            "name": "Flan de Leche",
+            "price": "6.00",
+            "description": "Traditional Mexican vanilla custard.",
+            "alt_text": "",
+            "image": "images/default.png",
+            "slug": "flan-de-leche",
+            "is_available": true,
+            "created": "2023-11-30T22:35:42.875Z",
+            "updated": "2023-11-30T22:35:42.875Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 51,
+        "fields": {
+            "store": 1,
+            "category": 13,
+            "name": "Tres Leches",
+            "price": "6.00",
+            "description": "Sponge cake soaked in three types of milk.",
+            "alt_text": "",
+            "image": "images/default.png",
+            "slug": "tres-leches",
+            "is_available": true,
+            "created": "2023-11-30T22:36:06.492Z",
+            "updated": "2023-11-30T22:36:06.492Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 52,
+        "fields": {
+            "store": 1,
+            "category": 14,
+            "name": "Guacamole",
+            "price": "1.50",
+            "description": "",
+            "alt_text": "",
+            "image": "images/default.png",
+            "slug": "guacamole",
+            "is_available": true,
+            "created": "2023-11-30T22:36:48.819Z",
+            "updated": "2023-11-30T22:36:48.819Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 53,
+        "fields": {
+            "store": 1,
+            "category": 14,
+            "name": "BTC Roasted Tomato Salsa",
+            "price": "3.00",
+            "description": "",
+            "alt_text": "",
+            "image": "images/default.png",
+            "slug": "btc-roasted-tomato-salsa",
+            "is_available": true,
+            "created": "2023-11-30T22:41:40.258Z",
+            "updated": "2023-11-30T22:41:40.258Z"
+        }
+    },
+    {
+        "model": "catalogue.menuitem",
+        "pk": 54,
+        "fields": {
+            "store": 1,
+            "category": 14,
+            "name": "BTC Habanero Salsa",
+            "price": "1.00",
+            "description": "",
+            "alt_text": "",
+            "image": "images/default.png",
+            "slug": "btc-habanero-salsa",
+            "is_available": true,
+            "created": "2023-11-30T22:42:01.538Z",
+            "updated": "2023-11-30T22:42:01.538Z"
+        }
+    }
+]

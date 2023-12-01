@@ -1,0 +1,142 @@
+[
+    {
+        "model": "catalogue.category",
+        "pk": 1,
+        "fields": {
+            "name": "Appetizer",
+            "slug": "appetizer",
+            "store": 1,
+            "description": ""
+        }
+    },
+    {
+        "model": "catalogue.category",
+        "pk": 2,
+        "fields": {
+            "name": "Special Dishes",
+            "slug": "special-dishes",
+            "store": 1,
+            "description": ""
+        }
+    },
+    {
+        "model": "catalogue.category",
+        "pk": 3,
+        "fields": {
+            "name": "Sopas",
+            "slug": "sopas",
+            "store": 1,
+            "description": ""
+        }
+    },
+    {
+        "model": "catalogue.category",
+        "pk": 4,
+        "fields": {
+            "name": "Tacos",
+            "slug": "tacos",
+            "store": 1,
+            "description": "Served in corn tortilla with onions, cilantro, lettuce, and salsa verde."
+        }
+    },
+    {
+        "model": "catalogue.category",
+        "pk": 5,
+        "fields": {
+            "name": "Burritos",
+            "slug": "burritos",
+            "store": 1,
+            "description": "Served in flour tortilla with Spanish rice, Oaxaca black beans, lettuce, Pico de Dallo, and BTC Mexican queso mix."
+        }
+    },
+    {
+        "model": "catalogue.category",
+        "pk": 6,
+        "fields": {
+            "name": "Bowl",
+            "slug": "bowl",
+            "store": 1,
+            "description": "Spanish rice, Oaxaca black beans, lettuce, Pico de Gallo, and BTC Mexican queso mix."
+        }
+    },
+    {
+        "model": "catalogue.category",
+        "pk": 7,
+        "fields": {
+            "name": "Quesadillas",
+            "slug": "quesadillas",
+            "store": 1,
+            "description": "Served between flour tortillas with melted BTC Mexican queso mix."
+        }
+    },
+    {
+        "model": "catalogue.category",
+        "pk": 8,
+        "fields": {
+            "name": "Enchilada",
+            "slug": "enchilada",
+            "store": 1,
+            "description": "2 baked rolled corn rotillas topped with Cotija cheese, sour crea, Spanish rice, Oaxaca beans, and your choice of red onions or Pico de Gallo."
+        }
+    },
+    {
+        "model": "catalogue.category",
+        "pk": 9,
+        "fields": {
+            "name": "Tortas",
+            "slug": "tortas",
+            "store": 1,
+            "description": "Pressed sandwich on Mexican bread sourced from local panaderia, filled with Jalapeño, red onions, melted Mozarella cheese, Oaxaca black beans, lettuce, tomato, and chipotle aioli."
+        }
+    },
+    {
+        "model": "catalogue.category",
+        "pk": 10,
+        "fields": {
+            "name": "Ensalada",
+            "slug": "ensalada",
+            "store": 1,
+            "description": ""
+        }
+    },
+    {
+        "model": "catalogue.category",
+        "pk": 11,
+        "fields": {
+            "name": "Tostada",
+            "slug": "tostada",
+            "store": 1,
+            "description": "Flat corn crispy tortilla, Oaxaca refried bean spread, lettuce, sourc crea, salsa verde, and Cotija cheese."
+        }
+    },
+    {
+        "model": "catalogue.category",
+        "pk": 12,
+        "fields": {
+            "name": "Empanadas",
+            "slug": "empanadas",
+            "store": 1,
+            "description": "3 Friend turnover flour pastry."
+        }
+    },
+    {
+        "model": "catalogue.category",
+        "pk": 13,
+        "fields": {
+            "name": "Sides",
+            "slug": "sides",
+            "store": 1,
+            "description": ""
+        }
+    },
+    {
+        "model": "catalogue.category",
+        "pk": 13,
+        "fields": {
+            "name": "Desert",
+            "slug": "desert",
+            "store": 1,
+            "description": ""
+        }
+    }
+]
