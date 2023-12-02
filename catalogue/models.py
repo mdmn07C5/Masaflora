@@ -1,7 +1,11 @@
 from django.db import models
 from django.db.models.query import QuerySet
 from django.urls import reverse
+from django.forms.models import model_to_dict
 from phonenumber_field.modelfields import PhoneNumberField
+from itertools import chain
+from .utils import DecimalEncoder
+import json
 
 
 class MenuItemManager(models.Manager):
@@ -43,6 +47,9 @@ class MenuItem(models.Model):
         return reverse(
             viewname="catalogue:detail", args=[self.category.slug, self.slug]
         )
+
+    def get_options(self):
+        return chain(self.category.option_set.all(), self.option_set.all())
 
     def __str__(self):
         return self.name
@@ -108,3 +115,9 @@ class Option(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
+    def info(self):
+        fields = model_to_dict(self)
+        del fields["category"]
+        del fields["item"]
+        return json.dumps(fields, cls=DecimalEncoder)

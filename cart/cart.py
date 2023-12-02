@@ -1,4 +1,4 @@
-from catalogue.models import MenuItem
+from catalogue.models import MenuItem, Option
 from decimal import Decimal
 
 
@@ -16,7 +16,7 @@ class Cart:
     def save(self):
         self.session.modified = True
 
-    def add(self, menuitem, menuitemqty):
+    def add(self, menuitem, menuitemqty, options):
         """Add/update user's cart session data
 
         Args:
@@ -32,8 +32,16 @@ class Cart:
             },
         )
 
+        # TODO:
+        # - each item's options (if selected)
+        # - each item's subtotal with options included
+        # - drop qty, each item will be unique regardless of how many times it's
+        #   added to the order
+
         qty = self.cart[menuitem_id].get("qty", 0)
         self.cart[menuitem_id]["qty"] = int(menuitemqty) + int(qty)
+
+        # self.cart[menuitem_id]["options"] = options
 
         self.cart[menuitem_id]["sub_total"] = str(self.get_sub_total(menuitem_id))
 
