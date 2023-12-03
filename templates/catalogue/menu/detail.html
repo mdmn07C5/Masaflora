@@ -28,12 +28,14 @@
                             <li class="list-group-item">
                                 {% for op in menuitem.get_options %}
                                     <div class="form-check" id="options">
-                                        {% comment %} <input class="form-check-input" autocomplete="off" type="checkbox" value='{ "price":{{op.price}}, "id":{{op.id}}}' id="op-select"> {% endcomment %}
+                                        {% comment %} <input class="form-check-input"
+        autocomplete="off"
+        type="checkbox"
+        value='{ "price":{{op.price}}, "id":{{op.id}}}'
+        id="op-select"> {% endcomment %}
                                         {% comment %} <label class="form-check-label" for="op-select">{{ op.name }} - ${{ op.price }}</label> {% endcomment %}
-                                        <input class="form-check-input" autocomplete="off" type="checkbox" value={{ op.id }} id="op-select">
+                                        <input class="form-check-input" autocomplete="off" type="checkbox" value={{ op.id }} data-option-name={{ op.name }} data-option-price={{ op.price }} id="op-select">
                                         <label class="form-check-label" for="op-select">{{ op.name }} - ${{ op.price }}</label>
-
-
                                     </div>
                                 {% endfor %}
                             </li>
@@ -86,36 +88,14 @@
         })
 
         $(document).on("change", ":checkbox", function () {
-            var toggle = $(this).is(":checked");
-            $.ajax({
-                type: "POST",
-                url: "{% url "cart:option_info" %}",
-                data: {
-                    optionid: $(this).val(),
-                    csrfmiddlewaretoken: "{{ csrf_token }}",
-                    action: "post"
-                },
-                success: function (json) {
-                    let original = parseFloat(document.getElementById("item-price").innerHTML.substring(1));
-                    let option_price = parseFloat(json.price);
-                    if (toggle) {
-                        document.getElementById("item-price").innerHTML = "$" + (original + option_price).toFixed(2);
-                    } else {
-                        document.getElementById("item-price").innerHTML = "$" + (original - option_price).toFixed(2);
-                    }
-                },
-                error: function (xhr, errmsg, err) {
-                    console.log("OH SHET DOD");
-                }
-            })
-
-
+            let original = parseFloat(document.getElementById("item-price").innerHTML.substring(1));
+            let option_price = parseFloat($(this).attr("data-option-price"));
+            if ($(this).is(":checked")) {
+                document.getElementById("item-price").innerHTML = "$" + (original + option_price).toFixed(2);
+            } else {
+                document.getElementById("item-price").innerHTML = "$" + (original - option_price).toFixed(2);
+            }
         })
-        {% comment %} var selections = {};
-        var checkboxes = $([type="checkbox"])
-        console.log(checkboxes.length);
-        for (check in checkboxes) {
-            console.log(check.value);
-        } {% endcomment %}
+
     </script>
 {% endblock content %}

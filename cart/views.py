@@ -34,8 +34,8 @@ def cart_add(request):
 
 
 def option_info(request):
-    if request.POST.get("action") == "post":
-        option_id = int(request.POST.get("optionid"))
+    if request.GET.get("action") == "get":
+        option_id = int(request.GET.get("optionid"))
         option = get_object_or_404(Option, id=option_id)
         response = JsonResponse(
             {
