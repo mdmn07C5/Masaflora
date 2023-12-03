@@ -62,7 +62,6 @@
     <script>
         $(document).on("click", "#add-to-cart-button", function (e) {
             e.preventDefault();
-            // console.log($("#add-to-cart-button").val())
             var chosen_options = [];
             $("input:checked").each(function() {
                 chosen_options.push($(this).val())

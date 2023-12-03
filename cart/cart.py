@@ -1,5 +1,7 @@
 from catalogue.models import MenuItem, Option
 from decimal import Decimal
+import json
+import hashlib
 
 
 class Cart:
@@ -7,7 +9,6 @@ class Cart:
 
     def __init__(self, request):
         self.session = request.session
-        # self.cart = self.session.get('session_cart', {'Peepee':'PooPoo'})
         cart = self.session.get("session_cart")
         if "session_cart" not in request.session:
             cart = self.session["session_cart"] = {}
@@ -16,69 +17,67 @@ class Cart:
     def save(self):
         self.session.modified = True
 
-    def add(self, menuitem, menuitemqty, options):
+    def add(self, menuitem, options):
         """Add/update user's cart session data
 
         Args:
             menuitem (MenuItem): the item to add  into the cart
         """
-        menuitem_id = str(menuitem.id)
-        self.cart[menuitem_id] = self.cart.get(
-            menuitem_id,
-            {
-                "price": str(
-                    menuitem.price,
-                )
-            },
-        )
-
-        # TODO:
-        # - each item's options (if selected)
-        # - each item's subtotal with options included
-        # - drop qty, each item will be unique regardless of how many times it's
-        #   added to the order
-
-        qty = self.cart[menuitem_id].get("qty", 0)
-        self.cart[menuitem_id]["qty"] = int(menuitemqty) + int(qty)
-
-        # self.cart[menuitem_id]["options"] = options
-
-        self.cart[menuitem_id]["sub_total"] = str(self.get_sub_total(menuitem_id))
-
+        items = self.cart.get("items", [])
+        opts = {}
+        for op in json.loads(options):
+            o = Option.objects.get(id=op)
+            opts[o.id] = {
+                "name": o.name,
+                "price": str(o.price),
+            }
+        item = {
+            "id": str(menuitem.id),
+            "name": str(menuitem.name),
+            "price": str(menuitem.price),
+            "options": opts,
+        }
+        items.append(item)
+        self.cart["items"] = items
         self.save()
 
-    def delete(self, menuitem_id):
+        return self.get_sub_total(-1)
+
+    def delete(self, index):
         """Delete menuitem from cart
 
         Args:
-            menuitem_id (int): primary key of the menuitem to delete
+            index (int): index of the item to delete
         """
-        menuitem_id = str(menuitem_id)
-        if menuitem_id in self.cart:
-            del self.cart[menuitem_id]
-
+        if index in self.cart.items:
+            del self.cart.items[index]
             self.save()
 
-    def get_sub_total(self, menuitem_id):
-        return self.cart[menuitem_id]["qty"] * Decimal(self.cart[menuitem_id]["price"])
+    def get_sub_total(self, item_index):
+        item = self.cart["items"][item_index]
+        sub_total = Decimal(item["price"])
+        for op in item["options"].values():
+            sub_total += Decimal(op["price"])
+        return sub_total
 
     def get_total(self):
-        return sum(Decimal(item["price"]) * item["qty"] for item in self.cart.values())
+        total = Decimal(0)
+        for i, item in enumerate(self.cart["items"]):
+            total += +Decimal(self.get_sub_total(i))
+        return total
 
     def __len__(self):
         print(self.cart.items())
-        return sum(item["qty"] for item in self.cart.values())
+        return len(self.cart.get("items", []))
 
     def __iter__(self):
         """Collect menuitem id from session data to query db and return menuitems"""
-        menuitem_ids = self.cart.keys()
+        menuitem_ids = [item["id"] for item in self.cart["items"]]
         menuitems = MenuItem.objects.filter(id__in=menuitem_ids)
 
         cart = self.cart.copy()
-        for menuitem in menuitems:
-            cart[str(menuitem.id)]["menuitem"] = menuitem
 
-        for item in cart.values():
-            item["price"] = Decimal(item["price"])
-            item["total_price"] = item["price"] * item["qty"]
+        for i, item in enumerate(cart["items"]):
+            item["menuitem"] = menuitems.get(id=item["id"])
+            item["total_price"] = self.get_sub_total(i)
             yield item
