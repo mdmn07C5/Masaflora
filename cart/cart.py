@@ -80,4 +80,4 @@ class Cart:
         for i, item in enumerate(cart["items"]):
             item["menuitem"] = menuitems.get(id=item["id"])
             item["total_price"] = self.get_sub_total(i)
-            yield item
+            yield i, item

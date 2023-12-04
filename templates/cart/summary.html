@@ -7,35 +7,45 @@
     <main class="pt-5">
         <div class="container">
             <h1 class="h5">Shopping Cart</h1>
-            {% for item in cart %}
-            {% with menuitem=item.menuitem %}
-            {{ item }}
-            <div data-index="{{ menuitem.id }}", class="card mb-3 border-0 menu-item">
-                <div class="row g-0">
-                    <div class="col-md-2 d-none d-md-block bg-light">
-                        <img class="img-fluid mx-auto d-block" width="120px" alt="Responsive image" src="{{ menuitem.image.url }}">
-                    </div>
-
-                    <div class="col-md-10 ps-md-3">
-                        <div class="card-body p-1">
-                            <a class="test-decoration-none text-reset" href="{{ menuitem.get_absolute_url }}" >
-                                <h5 class="card-title">{{ menuitem.name }}</h5>
-                                <p class="card-text pb-3">{{ menuitem.alt_text }}</p>
-                            </a>
-
-                
-                                <div class="row">
-                                    <div class="row p-3">
-                                        <div class="col-6">Amount:
-                                            <div id="{{ menuitem.id }}-qty" class="d-inline">
-                                                {{ item.qty }}
-                                            </div>
+            {% for index, item in cart %}
+                {% comment %} {{ item }} {% endcomment %}
+                {% with menuitem=item.menuitem %}
+                    <div class="card mb-3 border-0 menu-item" data-index="{{ index }}">
+                        <div class="row g-0">
+                            <div class="col-md-2 d-none d-md-block bg-light">
+                                <img class="img-fluid mx-auto d-block"
+                                     width="120px"
+                                     alt="Responsive image"
+                                     src="{{ menuitem.image.url }}">
+                            </div>
+                            <div class="col-md-10 ps-md-3">
+                                <div class="card-body p-1">
+                                    <a class="text-reset" href="{{ menuitem.get_absolute_url }}">
+                                        <h5 class="card-title">{{ menuitem.name }}</h5>
+                                        <p class="card-text pb-3">{{ menuitem.alt_text }}</p>
+                                    </a>
+                                    {% comment %} {{ item.options }} {% endcomment %}
+                                    {% if item.options.items|length > 0 %}
+                                    <ul>
+                                    {% for op_k, op_v in item.options.items %}
+                                        <li>{{ op_v.name }} - {{ op_v.price }}</li>    
+                                    {% endfor %}
+                                    </ul>
+                                    {% endif %}
+                                    {% comment %} {{ item.options.8.name }} {% endcomment %}
+                                    {% comment %} <div class="row"> {% endcomment %}
+                                    <div class="row">
+                                        <div class="col-6">
+                                            Amount:
+                                            <div id="{{ menuitem.id }}-qty" class="d-inline">{{ item.qty }}</div>
                                         </div>
-                                        <div class="col-6 text-end"><span class="h6 fw-bold">
-                                            $<div id="{{ menuitem.id }}-sub-total" class="d-inline">{{ item.total_price }}</div>
-                                        </span></div>
+                                        <div class="col-6 text-end">
+                                            <span class="h6 fw-bold">
+                                                $
+                                                <div id="{{ menuitem.id }}-sub-total" class="d-inline">{{ item.total_price }}</div>
+                                            </span>
+                                        </div>
                                     </div>
-
                                     <div class="row">
                                         <div class="row p-3">
                                             <div class="col-12">
@@ -44,27 +54,28 @@
                                                     <option selected value=1>1</option>
                                                     {% for i in '2345' %}<option value="{{ i }}">{{ i }}</option>{% endfor %}
                                                 </select>
-                                                <a type="button", id="update-button" data-index="{{ menuitem.id }}" class="btn btn-outline-secondary btn-sm update-button">Update</a>
-                                                <a type="button", id="delete-button" data-index="{{ menuitem.id }}" class="btn btn-outline-secondary btn-sm delete-button">Delete</a>
+                                                <a type="button"
+                                                   id="update-button"
+                                                   data-index="{{ menuitem.id }}"
+                                                   class="btn btn-outline-secondary btn-sm update-button">Update</a>
+                                                <a type="button"
+                                                   id="delete-button"
+                                                   data-index="{{ menuitem.id }}"
+                                                   class="btn btn-outline-secondary btn-sm delete-button">Delete</a>
                                             </div>
                                         </div>
                                     </div>
+                                    {% comment %} </div> {% endcomment %}
                                 </div>
-                            
+                            </div>
                         </div>
                     </div>
-
-                    
-
-                    
-                </div>
-            </div>
-
-            {% endwith %}
+                {% endwith %}
             {% endfor %}
             <div class="col-12 text-end">
                 <div class="h3 fw-bold">
-                    Total: $<div id="total" class="d-inline">{{ cart.get_total }}</div>
+                    Total: $
+                    <div id="total" class="d-inline">{{ cart.get_total }}</div>
                 </div>
             </div>
         </div>
