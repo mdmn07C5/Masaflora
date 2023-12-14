@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 import json
+from pprint import pp
 from .cart import Cart
 from catalogue.models import MenuItem, Option
 
@@ -29,6 +30,7 @@ def cart_add(request):
                 "total": cart.get_total(),
             }
         )
+        pp(response.content)
         return response
 
 
@@ -49,7 +51,7 @@ def option_info(request):
 def cart_delete(request):
     cart = Cart(request)
     if request.POST.get("action") == "post":
-        menuitem_id = int(request.POST.get("menuitemid"))
-        cart.delete(menuitem_id=menuitem_id)
+        item_index = int(request.POST.get("item_index"))
+        cart.delete(index=item_index)
         response = JsonResponse({"qty": len(cart), "total": cart.get_total()})
         return response

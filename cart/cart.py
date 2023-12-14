@@ -1,5 +1,6 @@
 from catalogue.models import MenuItem, Option
 from decimal import Decimal
+import pprint
 import json
 import hashlib
 
@@ -24,13 +25,18 @@ class Cart:
             menuitem (MenuItem): the item to add  into the cart
         """
         items = self.cart.get("items", [])
-        opts = {}
-        for op in json.loads(options):
-            o = Option.objects.get(id=op)
-            opts[o.id] = {
-                "name": o.name,
-                "price": str(o.price),
-            }
+
+        try:
+            opts = {}
+            for op in json.loads(options):
+                o = Option.objects.get(id=op)
+                opts[o.id] = {
+                    "name": o.name,
+                    "price": str(o.price),
+                }
+        except:
+            opts = {}
+
         item = {
             "id": str(menuitem.id),
             "name": str(menuitem.name),
@@ -49,9 +55,11 @@ class Cart:
         Args:
             index (int): index of the item to delete
         """
-        if index in self.cart.items:
-            del self.cart.items[index]
-            self.save()
+        # if index in self.cart.items:
+        #     del self.cart.items[index]
+        #     self.save()
+        del self.cart["items"][index]
+        self.save()
 
     def get_sub_total(self, item_index):
         item = self.cart["items"][item_index]
@@ -67,7 +75,8 @@ class Cart:
         return total
 
     def __len__(self):
-        print(self.cart.items())
+        # pprint(self.cart.items(), )
+        # pprint.pp(self.cart.items())
         return len(self.cart.get("items", []))
 
     def __iter__(self):

@@ -36,7 +36,7 @@
                                     {% comment %} <div class="row"> {% endcomment %}
                                     <div class="row">
                                         <div class="col-6">
-                                            Amount:
+                                            Subtotal:
                                             <div id="{{ menuitem.id }}-qty" class="d-inline">{{ item.qty }}</div>
                                         </div>
                                         <div class="col-6 text-end">
@@ -49,18 +49,9 @@
                                     <div class="row">
                                         <div class="row p-3">
                                             <div class="col-12">
-                                                <label for="select">Qty</label>
-                                                <select id="select"{{ item.id }}>
-                                                    <option selected value=1>1</option>
-                                                    {% for i in '2345' %}<option value="{{ i }}">{{ i }}</option>{% endfor %}
-                                                </select>
-                                                <a type="button"
-                                                   id="update-button"
-                                                   data-index="{{ menuitem.id }}"
-                                                   class="btn btn-outline-secondary btn-sm update-button">Update</a>
                                                 <a type="button"
                                                    id="delete-button"
-                                                   data-index="{{ menuitem.id }}"
+                                                   data-index="{{ index }}"
                                                    class="btn btn-outline-secondary btn-sm delete-button">Delete</a>
                                             </div>
                                         </div>
@@ -75,7 +66,13 @@
             <div class="col-12 text-end">
                 <div class="h3 fw-bold">
                     Total: $
-                    <div id="total" class="d-inline">{{ cart.get_total }}</div>
+                    <div id="total" class="d-inline">
+                    {% if cart|length < 1 %}
+                        0
+                    {% else %}
+                        {{ cart.get_total }}
+                    {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -108,19 +105,20 @@
 
         $(document).on("click", "#delete-button", function (e) {
             e.preventDefault();
-            var item_id = $(this).data('index');
+            var item_index = $(this).data('index');
             $.ajax({
                 type: "POST",
                 url: "{% url "cart:cart_delete" %}",
                 data: {
-                    menuitemid: item_id,
+                    item_index: item_index,
                     csrfmiddlewaretoken: "{{ csrf_token }}",
                     action: "post"
                 },
                 success: function (json) {
                     document.getElementById("cart-item-qty").innerHTML = json.qty;
-                    $('.menu-item[data-index="' + item_id + '"]').remove();
+                    $('.menu-item[data-index="' + item_index + '"]').remove();
                     document.getElementById("total").innerHTML = json.total;
+                    if (!json.error) location.reload(true);
                 },
                 error: function (xhr, errmsg, err) {
 
