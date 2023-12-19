@@ -36,3 +36,6 @@ SPEC
 # 
 templates/drafts/
 old/
+
+# stripe
+stripe.txt
